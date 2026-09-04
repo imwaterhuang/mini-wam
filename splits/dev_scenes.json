@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "task": "pusht",
+  "split": "development",
+  "generation_seed": 42,
+  "generator": "mini_wam.studio.pusht.random_scene",
+  "count": 20,
+  "scenes_hash": "105cc50ac79a8a20ec131d4fea5b88a12ffae6532063cc143ce6b3a650fe0d2e",
+  "scenes": [
+    {
+      "scene_id": "dev-000",
+      "environment_seed": 191664963,
+      "state": {
+        "agent_x": 61.0,
+        "agent_y": 375.0,
+        "block_x": 294.0,
+        "block_y": 286.0,
+        "block_angle": 2.4122821322045773
+      }
+    },
+    {
+      "scene_id": "dev-001",
+      "environment_seed": 1662057957,
+      "state": {
+        "agent_x": 388.0,
+        "agent_y": 170.0,
+        "block_x": 203.0,
+        "block_y": 282.0,
+        "block_angle": 2.26779310087174
+      }
+    },
+    {
+      "scene_id": "dev-002",
+      "environment_seed": 1405681631,
+      "state": {
+        "agent_x": 97.0,
+        "agent_y": 108.0,
+        "block_x": 189.0,
+        "block_y": 122.0,
+        "block_angle": 0.7392849319487754
+      }
+    },
+    {
+      "scene_id": "dev-003",
+      "environment_seed": 942484272,
+      "state": {
+        "agent_x": 302.0,
+        "agent_y": 211.0,
+        "block_x": 141.0,
+        "block_y": 163.0,
+        "block_angle": 0.5809019282073149
+      }
+    },
+    {
+      "scene_id": "dev-004",
+      "environment_seed": 929893137,
+      "state": {
+        "agent_x": 172.0,
+        "agent_y": 251.0,
+        "block_x": 254.0,
+        "block_y": 128.0,
+        "block_angle": -1.3360796467627567
+      }
+    },
+    {
+      "scene_id": "dev-005",
+      "environment_seed": 1843824992,
+      "state": {
+        "agent_x": 343.0,
+        "agent_y": 351.0,
+        "block_x": 213.0,
+        "block_y": 148.0,
+        "block_angle": -0.3647803864566434
+      }
+    },
+    {
+      "scene_id": "dev-006",
+      "environment_seed": 1497586438,
+      "state": {
+        "agent_x": 240.0,
+        "agent_y": 75.0,
+        "block_x": 336.0,
+        "block_y": 349.0,
+        "block_angle": 1.558454724319722
+      }
+    },
+    {
+      "scene_id": "dev-007",
+      "environment_seed": 432652533,
+      "state": {
+        "agent_x": 62.0,
+        "agent_y": 339.0,
+        "block_x": 200.0,
+        "block_y": 331.0,
+        "block_angle": -2.8018113474385937
+      }
+    },
+    {
+      "scene_id": "dev-008",
+      "environment_seed": 202244314,
+      "state": {
+        "agent_x": 425.0,
+        "agent_y": 180.0,
+        "block_x": 241.0,
+        "block_y": 244.0,
+        "block_angle": -0.40841990255786037
+      }
+    },
+    {
+      "scene_id": "dev-009",
+      "environment_seed": 1130604997,
+      "state": {
+        "agent_x": 75.0,
+        "agent_y": 63.0,
+        "block_x": 258.0,
+        "block_y": 112.0,
+        "block_angle": -1.4556585035231624
+      }
+    },
+    {
+      "scene_id": "dev-010",
+      "environment_seed": 2095133045,
+      "state": {
+        "agent_x": 405.0,
+        "agent_y": 362.0,
+        "block_x": 151.0,
+        "block_y": 282.0,
+        "block_angle": -2.482922460820852
+      }
+    },
+    {
+      "scene_id": "dev-011",
+      "environment_seed": 1580016183,
+      "state": {
+        "agent_x": 187.0,
+        "agent_y": 163.0,
+        "block_x": 201.0,
+        "block_y": 319.0,
+        "block_angle": 0.6855215865040591
+      }
+    },
+    {
+      "scene_id": "dev-012",
+      "environment_seed": 1634535062,
+      "state": {
+        "agent_x": 328.0,
+        "agent_y": 76.0,
+        "block_x": 290.0,
+        "block_y": 240.0,
+        "block_angle": -2.5833200273067702
+      }
+    },
+    {
+      "scene_id": "dev-013",
+      "environment_seed": 1540770719,
+      "state": {
+        "agent_x": 265.0,
+        "agent_y": 142.0,
+        "block_x": 100.0,
+        "block_y": 371.0,
+        "block_angle": -3.03417098250872
+      }
+    },
+    {
+      "scene_id": "dev-014",
+      "environment_seed": 1102145672,
+      "state": {
+        "agent_x": 324.0,
+        "agent_y": 402.0,
+        "block_x": 370.0,
+        "block_y": 344.0,
+        "block_angle": 1.9917368449582724
+      }
+    },
+    {
+      "scene_id": "dev-015",
+      "environment_seed": 275121930,
+      "state": {
+        "agent_x": 278.0,
+        "agent_y": 179.0,
+        "block_x": 358.0,
+        "block_y": 130.0,
+        "block_angle": -0.9381845378214378
+      }
+    },
+    {
+      "scene_id": "dev-016",
+      "environment_seed": 1803345590,
+      "state": {
+        "agent_x": 441.0,
+        "agent_y": 148.0,
+        "block_x": 156.0,
+        "block_y": 354.0,
+        "block_angle": -2.3368617829160447
+      }
+    },
+    {
+      "scene_id": "dev-017",
+      "environment_seed": 967196436,
+      "state": {
+        "agent_x": 129.0,
+        "agent_y": 228.0,
+        "block_x": 248.0,
+        "block_y": 313.0,
+        "block_angle": 2.9907955636921484
+      }
+    },
+    {
+      "scene_id": "dev-018",
+      "environment_seed": 1074497555,
+      "state": {
+        "agent_x": 137.0,
+        "agent_y": 449.0,
+        "block_x": 133.0,
+        "block_y": 307.0,
+        "block_angle": 0.43278850406168956
+      }
+    },
+    {
+      "scene_id": "dev-019",
+      "environment_seed": 796282693,
+      "state": {
+        "agent_x": 167.0,
+        "agent_y": 322.0,
+        "block_x": 196.0,
+        "block_y": 145.0,
+        "block_angle": 1.396673397825821
+      }
+    }
+  ]
+}

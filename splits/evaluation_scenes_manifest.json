@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "generation_seed": 42,
+  "development": {
+    "path": "splits/dev_scenes.json",
+    "count": 20,
+    "file_sha256": "d9ba5ecc48e71ea5c6b05021bed0cc9c437db56f7e7d5b39cb4741d9949c416c",
+    "scenes_hash": "105cc50ac79a8a20ec131d4fea5b88a12ffae6532063cc143ce6b3a650fe0d2e"
+  },
+  "final_test": {
+    "path": "splits/final_test_scenes.json",
+    "count": 50,
+    "file_sha256": "6916de3f51f58a80f5769ea41799f722cfd133db7148d24c8c4c1fba076864db",
+    "scenes_hash": "6fab03746cb7c206a22f1bd8e4fac1310211bdc608caba281d1211566ae4f720",
+    "sealed": true,
+    "evaluation_allowed_from_stage": 5
+  }
+}

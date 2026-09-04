@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "policy": "uniform_random_absolute_target_each_environment_step",
+  "policy_seed": 20260904,
+  "scene_file": "splits/dev_scenes.json",
+  "scenes_hash": "105cc50ac79a8a20ec131d4fea5b88a12ffae6532063cc143ce6b3a650fe0d2e",
+  "max_steps": 300,
+  "episode_count": 20,
+  "summary": {
+    "success_count": 0,
+    "success_rate": 0.0,
+    "mean_final_coverage": 0.0,
+    "median_final_coverage": 0.0,
+    "mean_max_coverage": 0.1201120862623,
+    "median_max_coverage": 0.0519294509175,
+    "mean_reward": 1.2239074381892499,
+    "mean_steps": 300.0
+  },
+  "episodes": [
+    {
+      "scene_id": "dev-000",
+      "environment_seed": 191664963,
+      "action_seed": 20260904,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.244372568229,
+      "reward": 1.349220302979,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-001",
+      "environment_seed": 1662057957,
+      "action_seed": 20260905,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.166155193694,
+      "reward": 1.723435772781,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-002",
+      "environment_seed": 1405681631,
+      "action_seed": 20260906,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.659409202287,
+      "reward": 1.957980858659,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-003",
+      "environment_seed": 942484272,
+      "action_seed": 20260907,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.000251871557,
+      "reward": 0.006309523499,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-004",
+      "environment_seed": 929893137,
+      "action_seed": 20260908,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.021559550724,
+      "reward": 0.065205344065,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-005",
+      "environment_seed": 1843824992,
+      "action_seed": 20260909,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.252982547459,
+      "reward": 3.226108637355,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-006",
+      "environment_seed": 1497586438,
+      "action_seed": 20260910,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.0,
+      "reward": 0.0,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-007",
+      "environment_seed": 432652533,
+      "action_seed": 20260911,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.049701849359,
+      "reward": 0.052317736167,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-008",
+      "environment_seed": 202244314,
+      "action_seed": 20260912,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.296965256256,
+      "reward": 5.565960887568,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-009",
+      "environment_seed": 1130604997,
+      "action_seed": 20260913,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.0,
+      "reward": 0.0,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-010",
+      "environment_seed": 2095133045,
+      "action_seed": 20260914,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.026641426913,
+      "reward": 1.052886537928,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-011",
+      "environment_seed": 1580016183,
+      "action_seed": 20260915,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.146094190297,
+      "reward": 0.456400075324,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-012",
+      "environment_seed": 1634535062,
+      "action_seed": 20260916,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.327114642494,
+      "reward": 5.082787577473,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-013",
+      "environment_seed": 1540770719,
+      "action_seed": 20260917,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.0,
+      "reward": 0.0,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-014",
+      "environment_seed": 1102145672,
+      "action_seed": 20260918,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.0,
+      "reward": 0.0,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-015",
+      "environment_seed": 275121930,
+      "action_seed": 20260919,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.0,
+      "reward": 0.0,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-016",
+      "environment_seed": 1803345590,
+      "action_seed": 20260920,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.0,
+      "reward": 0.0,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-017",
+      "environment_seed": 967196436,
+      "action_seed": 20260921,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.061029889754,
+      "reward": 0.653833678301,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-018",
+      "environment_seed": 1074497555,
+      "action_seed": 20260922,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.095806483747,
+      "reward": 2.551626511444,
+      "steps": 300
+    },
+    {
+      "scene_id": "dev-019",
+      "environment_seed": 796282693,
+      "action_seed": 20260923,
+      "is_success": false,
+      "final_coverage": 0.0,
+      "max_coverage": 0.054157052476,
+      "reward": 0.734075320242,
+      "steps": 300
+    }
+  ]
+}

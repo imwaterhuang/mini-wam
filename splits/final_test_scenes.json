@@ -1,0 +1,561 @@
+{
+  "schema_version": 1,
+  "task": "pusht",
+  "split": "final_test",
+  "generation_seed": 42,
+  "generator": "mini_wam.studio.pusht.random_scene",
+  "count": 50,
+  "scenes_hash": "6fab03746cb7c206a22f1bd8e4fac1310211bdc608caba281d1211566ae4f720",
+  "scenes": [
+    {
+      "scene_id": "final-000",
+      "environment_seed": 392022359,
+      "state": {
+        "agent_x": 414.0,
+        "agent_y": 219.0,
+        "block_x": 162.0,
+        "block_y": 351.0,
+        "block_angle": -0.7988271072813649
+      }
+    },
+    {
+      "scene_id": "final-001",
+      "environment_seed": 1678403330,
+      "state": {
+        "agent_x": 388.0,
+        "agent_y": 346.0,
+        "block_x": 198.0,
+        "block_y": 181.0,
+        "block_angle": 2.700355198504296
+      }
+    },
+    {
+      "scene_id": "final-002",
+      "environment_seed": 1382689815,
+      "state": {
+        "agent_x": 81.0,
+        "agent_y": 367.0,
+        "block_x": 222.0,
+        "block_y": 149.0,
+        "block_angle": 3.0804233652234427
+      }
+    },
+    {
+      "scene_id": "final-003",
+      "environment_seed": 1766867109,
+      "state": {
+        "agent_x": 215.0,
+        "agent_y": 99.0,
+        "block_x": 348.0,
+        "block_y": 329.0,
+        "block_angle": 2.2328613234178842
+      }
+    },
+    {
+      "scene_id": "final-004",
+      "environment_seed": 952224740,
+      "state": {
+        "agent_x": 233.0,
+        "agent_y": 108.0,
+        "block_x": 315.0,
+        "block_y": 296.0,
+        "block_angle": -1.21488168721322
+      }
+    },
+    {
+      "scene_id": "final-005",
+      "environment_seed": 967354524,
+      "state": {
+        "agent_x": 421.0,
+        "agent_y": 416.0,
+        "block_x": 112.0,
+        "block_y": 166.0,
+        "block_angle": 2.528022699405724
+      }
+    },
+    {
+      "scene_id": "final-006",
+      "environment_seed": 487991438,
+      "state": {
+        "agent_x": 436.0,
+        "agent_y": 375.0,
+        "block_x": 254.0,
+        "block_y": 169.0,
+        "block_angle": 0.68337748761492
+      }
+    },
+    {
+      "scene_id": "final-007",
+      "environment_seed": 1190961760,
+      "state": {
+        "agent_x": 433.0,
+        "agent_y": 59.0,
+        "block_x": 354.0,
+        "block_y": 324.0,
+        "block_angle": 2.1883898558037678
+      }
+    },
+    {
+      "scene_id": "final-008",
+      "environment_seed": 1906728918,
+      "state": {
+        "agent_x": 338.0,
+        "agent_y": 391.0,
+        "block_x": 344.0,
+        "block_y": 224.0,
+        "block_angle": 0.258904109205566
+      }
+    },
+    {
+      "scene_id": "final-009",
+      "environment_seed": 1843166518,
+      "state": {
+        "agent_x": 189.0,
+        "agent_y": 139.0,
+        "block_x": 379.0,
+        "block_y": 367.0,
+        "block_angle": 2.759722335165526
+      }
+    },
+    {
+      "scene_id": "final-010",
+      "environment_seed": 1777324407,
+      "state": {
+        "agent_x": 358.0,
+        "agent_y": 206.0,
+        "block_x": 158.0,
+        "block_y": 275.0,
+        "block_angle": 2.3452124688450766
+      }
+    },
+    {
+      "scene_id": "final-011",
+      "environment_seed": 594336917,
+      "state": {
+        "agent_x": 132.0,
+        "agent_y": 248.0,
+        "block_x": 229.0,
+        "block_y": 141.0,
+        "block_angle": 1.2847239459015254
+      }
+    },
+    {
+      "scene_id": "final-012",
+      "environment_seed": 1356488967,
+      "state": {
+        "agent_x": 392.0,
+        "agent_y": 301.0,
+        "block_x": 176.0,
+        "block_y": 193.0,
+        "block_angle": -1.8388876377595413
+      }
+    },
+    {
+      "scene_id": "final-013",
+      "environment_seed": 354826746,
+      "state": {
+        "agent_x": 361.0,
+        "agent_y": 363.0,
+        "block_x": 276.0,
+        "block_y": 140.0,
+        "block_angle": -1.3891521041020554
+      }
+    },
+    {
+      "scene_id": "final-014",
+      "environment_seed": 1627981024,
+      "state": {
+        "agent_x": 425.0,
+        "agent_y": 355.0,
+        "block_x": 247.0,
+        "block_y": 385.0,
+        "block_angle": 1.628564435655504
+      }
+    },
+    {
+      "scene_id": "final-015",
+      "environment_seed": 1504361614,
+      "state": {
+        "agent_x": 297.0,
+        "agent_y": 115.0,
+        "block_x": 133.0,
+        "block_y": 166.0,
+        "block_angle": -2.7052261375910414
+      }
+    },
+    {
+      "scene_id": "final-016",
+      "environment_seed": 145857092,
+      "state": {
+        "agent_x": 322.0,
+        "agent_y": 91.0,
+        "block_x": 312.0,
+        "block_y": 206.0,
+        "block_angle": 0.894212212191174
+      }
+    },
+    {
+      "scene_id": "final-017",
+      "environment_seed": 2084558133,
+      "state": {
+        "agent_x": 245.0,
+        "agent_y": 318.0,
+        "block_x": 142.0,
+        "block_y": 292.0,
+        "block_angle": -1.143717665191906
+      }
+    },
+    {
+      "scene_id": "final-018",
+      "environment_seed": 957106589,
+      "state": {
+        "agent_x": 258.0,
+        "agent_y": 402.0,
+        "block_x": 195.0,
+        "block_y": 343.0,
+        "block_angle": -0.4465200772071652
+      }
+    },
+    {
+      "scene_id": "final-019",
+      "environment_seed": 1917963002,
+      "state": {
+        "agent_x": 64.0,
+        "agent_y": 90.0,
+        "block_x": 203.0,
+        "block_y": 251.0,
+        "block_angle": 2.373499327034912
+      }
+    },
+    {
+      "scene_id": "final-020",
+      "environment_seed": 1455819991,
+      "state": {
+        "agent_x": 69.0,
+        "agent_y": 221.0,
+        "block_x": 295.0,
+        "block_y": 210.0,
+        "block_angle": 2.600589849452912
+      }
+    },
+    {
+      "scene_id": "final-021",
+      "environment_seed": 1671565830,
+      "state": {
+        "agent_x": 96.0,
+        "agent_y": 231.0,
+        "block_x": 140.0,
+        "block_y": 277.0,
+        "block_angle": 1.7576644669535968
+      }
+    },
+    {
+      "scene_id": "final-022",
+      "environment_seed": 1631871623,
+      "state": {
+        "agent_x": 116.0,
+        "agent_y": 198.0,
+        "block_x": 333.0,
+        "block_y": 207.0,
+        "block_angle": 2.5107892800386016
+      }
+    },
+    {
+      "scene_id": "final-023",
+      "environment_seed": 417983441,
+      "state": {
+        "agent_x": 192.0,
+        "agent_y": 325.0,
+        "block_x": 338.0,
+        "block_y": 356.0,
+        "block_angle": 1.0809128188779156
+      }
+    },
+    {
+      "scene_id": "final-024",
+      "environment_seed": 781482251,
+      "state": {
+        "agent_x": 105.0,
+        "agent_y": 226.0,
+        "block_x": 123.0,
+        "block_y": 303.0,
+        "block_angle": 0.8129307757159787
+      }
+    },
+    {
+      "scene_id": "final-025",
+      "environment_seed": 1002275723,
+      "state": {
+        "agent_x": 244.0,
+        "agent_y": 69.0,
+        "block_x": 168.0,
+        "block_y": 116.0,
+        "block_angle": 0.9148386910680298
+      }
+    },
+    {
+      "scene_id": "final-026",
+      "environment_seed": 1068999196,
+      "state": {
+        "agent_x": 408.0,
+        "agent_y": 80.0,
+        "block_x": 236.0,
+        "block_y": 260.0,
+        "block_angle": -2.778449730178318
+      }
+    },
+    {
+      "scene_id": "final-027",
+      "environment_seed": 94067870,
+      "state": {
+        "agent_x": 306.0,
+        "agent_y": 350.0,
+        "block_x": 221.0,
+        "block_y": 226.0,
+        "block_angle": -0.2806727787823714
+      }
+    },
+    {
+      "scene_id": "final-028",
+      "environment_seed": 1173749071,
+      "state": {
+        "agent_x": 221.0,
+        "agent_y": 321.0,
+        "block_x": 345.0,
+        "block_y": 355.0,
+        "block_angle": 0.38537106594944504
+      }
+    },
+    {
+      "scene_id": "final-029",
+      "environment_seed": 331334160,
+      "state": {
+        "agent_x": 327.0,
+        "agent_y": 260.0,
+        "block_x": 254.0,
+        "block_y": 154.0,
+        "block_angle": -2.1423252538678406
+      }
+    },
+    {
+      "scene_id": "final-030",
+      "environment_seed": 1596387604,
+      "state": {
+        "agent_x": 398.0,
+        "agent_y": 444.0,
+        "block_x": 342.0,
+        "block_y": 345.0,
+        "block_angle": -1.74050382419578
+      }
+    },
+    {
+      "scene_id": "final-031",
+      "environment_seed": 1466836456,
+      "state": {
+        "agent_x": 413.0,
+        "agent_y": 170.0,
+        "block_x": 119.0,
+        "block_y": 197.0,
+        "block_angle": -2.967762983362748
+      }
+    },
+    {
+      "scene_id": "final-032",
+      "environment_seed": 1981113449,
+      "state": {
+        "agent_x": 361.0,
+        "agent_y": 318.0,
+        "block_x": 116.0,
+        "block_y": 169.0,
+        "block_angle": 2.956224978622176
+      }
+    },
+    {
+      "scene_id": "final-033",
+      "environment_seed": 1599364550,
+      "state": {
+        "agent_x": 60.0,
+        "agent_y": 178.0,
+        "block_x": 286.0,
+        "block_y": 331.0,
+        "block_angle": 2.0888490756857476
+      }
+    },
+    {
+      "scene_id": "final-034",
+      "environment_seed": 787359109,
+      "state": {
+        "agent_x": 166.0,
+        "agent_y": 243.0,
+        "block_x": 285.0,
+        "block_y": 190.0,
+        "block_angle": 1.5172831009378538
+      }
+    },
+    {
+      "scene_id": "final-035",
+      "environment_seed": 2077711328,
+      "state": {
+        "agent_x": 370.0,
+        "agent_y": 436.0,
+        "block_x": 277.0,
+        "block_y": 236.0,
+        "block_angle": -0.8369500111391651
+      }
+    },
+    {
+      "scene_id": "final-036",
+      "environment_seed": 882294416,
+      "state": {
+        "agent_x": 123.0,
+        "agent_y": 387.0,
+        "block_x": 370.0,
+        "block_y": 352.0,
+        "block_angle": 1.842088205361891
+      }
+    },
+    {
+      "scene_id": "final-037",
+      "environment_seed": 699704628,
+      "state": {
+        "agent_x": 333.0,
+        "agent_y": 130.0,
+        "block_x": 225.0,
+        "block_y": 335.0,
+        "block_angle": 1.9518651796409916
+      }
+    },
+    {
+      "scene_id": "final-038",
+      "environment_seed": 1944623248,
+      "state": {
+        "agent_x": 440.0,
+        "agent_y": 53.0,
+        "block_x": 306.0,
+        "block_y": 233.0,
+        "block_angle": -3.0403028843617794
+      }
+    },
+    {
+      "scene_id": "final-039",
+      "environment_seed": 795556160,
+      "state": {
+        "agent_x": 197.0,
+        "agent_y": 396.0,
+        "block_x": 199.0,
+        "block_y": 161.0,
+        "block_angle": -0.060060709655117867
+      }
+    },
+    {
+      "scene_id": "final-040",
+      "environment_seed": 163945743,
+      "state": {
+        "agent_x": 398.0,
+        "agent_y": 386.0,
+        "block_x": 361.0,
+        "block_y": 116.0,
+        "block_angle": 1.7130007241379572
+      }
+    },
+    {
+      "scene_id": "final-041",
+      "environment_seed": 1008363426,
+      "state": {
+        "agent_x": 50.0,
+        "agent_y": 366.0,
+        "block_x": 238.0,
+        "block_y": 385.0,
+        "block_angle": -0.9226387532484301
+      }
+    },
+    {
+      "scene_id": "final-042",
+      "environment_seed": 1708709735,
+      "state": {
+        "agent_x": 201.0,
+        "agent_y": 427.0,
+        "block_x": 366.0,
+        "block_y": 390.0,
+        "block_angle": 2.8112075227071047
+      }
+    },
+    {
+      "scene_id": "final-043",
+      "environment_seed": 406886644,
+      "state": {
+        "agent_x": 255.0,
+        "agent_y": 200.0,
+        "block_x": 115.0,
+        "block_y": 181.0,
+        "block_angle": -2.940826103027847
+      }
+    },
+    {
+      "scene_id": "final-044",
+      "environment_seed": 994157306,
+      "state": {
+        "agent_x": 74.0,
+        "agent_y": 284.0,
+        "block_x": 154.0,
+        "block_y": 197.0,
+        "block_angle": -2.8474086106007803
+      }
+    },
+    {
+      "scene_id": "final-045",
+      "environment_seed": 279004307,
+      "state": {
+        "agent_x": 288.0,
+        "agent_y": 435.0,
+        "block_x": 122.0,
+        "block_y": 292.0,
+        "block_angle": -0.638112540624306
+      }
+    },
+    {
+      "scene_id": "final-046",
+      "environment_seed": 1474200731,
+      "state": {
+        "agent_x": 154.0,
+        "agent_y": 411.0,
+        "block_x": 384.0,
+        "block_y": 232.0,
+        "block_angle": -2.0037889916402665
+      }
+    },
+    {
+      "scene_id": "final-047",
+      "environment_seed": 709091226,
+      "state": {
+        "agent_x": 104.0,
+        "agent_y": 427.0,
+        "block_x": 198.0,
+        "block_y": 352.0,
+        "block_angle": -0.32673698298637666
+      }
+    },
+    {
+      "scene_id": "final-048",
+      "environment_seed": 487284116,
+      "state": {
+        "agent_x": 343.0,
+        "agent_y": 54.0,
+        "block_x": 101.0,
+        "block_y": 340.0,
+        "block_angle": -2.7479464740669224
+      }
+    },
+    {
+      "scene_id": "final-049",
+      "environment_seed": 1212254290,
+      "state": {
+        "agent_x": 325.0,
+        "agent_y": 104.0,
+        "block_x": 350.0,
+        "block_y": 273.0,
+        "block_angle": -0.35389993596788893
+      }
+    }
+  ]
+}

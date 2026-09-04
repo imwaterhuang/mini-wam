@@ -1,0 +1,124 @@
+{
+  "dataset": {
+    "repo_id": "lerobot/pusht_image",
+    "root": "/Users/marscolonizer/embodied-learning/wam-roadmap/mini-wam/data/lerobot/pusht_image",
+    "fps": 10,
+    "image_shape_hwc": [
+      96,
+      96,
+      3
+    ],
+    "license": "MIT"
+  },
+  "structure": {
+    "total_episodes": 206,
+    "total_frames": 25650,
+    "episode_length": {
+      "min": 49,
+      "max": 246,
+      "mean": 124.51456310679612,
+      "median": 122.0
+    },
+    "global_index_is_contiguous": true,
+    "duplicate_global_indices": 0,
+    "frame_index_error_episodes": [],
+    "timestamp_error_episodes": [],
+    "terminal_flag_error_episodes": [],
+    "action_semantics_heuristic": {
+      "description": "fraction where next agent position is no farther from action_t target",
+      "fraction": 0.9979955981763874,
+      "is_structural_proof": false
+    }
+  },
+  "ranges": {
+    "agent_position": {
+      "min": [
+        13.45642375946045,
+        32.93829345703125
+      ],
+      "max": [
+        496.14617919921875,
+        510.9578857421875
+      ],
+      "mean": [
+        229.11160278320312,
+        293.3111572265625
+      ],
+      "std": [
+        101.85482788085938,
+        96.48939514160156
+      ]
+    },
+    "action": {
+      "min": [
+        12.0,
+        25.0
+      ],
+      "max": [
+        511.0,
+        511.0
+      ],
+      "mean": [
+        228.23965454101562,
+        293.98907470703125
+      ],
+      "std": [
+        101.59954833984375,
+        96.03692626953125
+      ]
+    },
+    "reward": {
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "splits": {
+    "counts": {
+      "train": 185,
+      "validation": 21
+    },
+    "overlap": {
+      "train_validation": []
+    }
+  },
+  "training_normalization": {
+    "agent_position": {
+      "min": [
+        13.45642375946045,
+        32.93829345703125
+      ],
+      "max": [
+        496.14617919921875,
+        510.9578857421875
+      ],
+      "mean": [
+        228.90859985351562,
+        292.7921447753906
+      ],
+      "std": [
+        101.7940444946289,
+        96.59921264648438
+      ]
+    },
+    "action": {
+      "min": [
+        12.0,
+        25.0
+      ],
+      "max": [
+        511.0,
+        511.0
+      ],
+      "mean": [
+        227.9732666015625,
+        293.45751953125
+      ],
+      "std": [
+        101.51873016357422,
+        96.13258361816406
+      ]
+    },
+    "std_floor": 1e-06
+  },
+  "candidate_window_count": 25238
+}
