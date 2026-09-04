@@ -60,6 +60,32 @@ drive.mount('/content/drive')
 
 只有输出 `"ready": true` 才进入训练。
 
+### 4.1 训练速度诊断
+
+正式训练前或发现 step 明显偏慢时，在同一个 GPU runtime 中运行独立诊断：
+
+```bash
+%cd /content/mini-wam
+!python scripts/profile_action_only.py \
+  --config configs/action_only_seed0.yaml \
+  --checkpoint /content/drive/MyDrive/mini-wam-runs/action-only-seed0/checkpoints/last.pt \
+  --device cuda \
+  --num-workers 4 \
+  --warmup-batches 5 \
+  --measure-batches 20 \
+  --output /content/drive/MyDrive/mini-wam-runs/action-only-seed0/performance_profile.json
+```
+
+先分别使用 `--num-workers 0`、`2`、`4` 和 `--data-only` 做短测试，再用最快且没有
+worker 异常的值运行上面的完整诊断。本机实测 4 workers 最快，但 Colab 分配的 CPU
+数量不同，不能直接把本机结果当作 A100 runtime 的结论。
+
+该脚本不会覆盖 checkpoint 或训练指标。它在独立进程内对比旧完整数据路径与跳过未来
+图像的 `action_only` 路径，并分别报告数据准备、Host-to-Device（主机到设备）传输、
+GPU 计算和端到端耗时。只有 `used_fields_exactly_equal` 为 `true` 才允许从原 checkpoint
+恢复。新版 sampler 只在 optimizer 更新完成后推进 checkpoint 位置，因此 worker 预取
+不会再让恢复点提前；旧版 `num_workers=0` checkpoint 仍可直接加载。
+
 ## 5. GPU 冒烟测试
 
 本地运行目录和 Drive 镜像目录必须不同：
@@ -90,6 +116,7 @@ drive.mount('/content/drive')
   --config configs/action_only_seed0.yaml \
   --run-dir /content/mini-wam-work/action-only-seed0 \
   --mirror-dir /content/drive/MyDrive/mini-wam-runs/action-only-seed0 \
+  --num-workers 4 \
   --device cuda
 ```
 
@@ -107,10 +134,12 @@ checkpoint 选择规则预先固定为：使用离线验证损失最低的 `best
   --resume /content/drive/MyDrive/mini-wam-runs/action-only-seed0/checkpoints/last.pt \
   --run-dir /content/mini-wam-work/action-only-seed0 \
   --mirror-dir /content/drive/MyDrive/mini-wam-runs/action-only-seed0 \
+  --num-workers 4 \
   --device cuda
 ```
 
-训练器会先把 Drive 中已有的运行记录恢复到本地目录，再从下一批数据精确继续。
+训练器会先把 Drive 中已有的运行记录恢复到本地目录，再从下一批数据精确继续。命令中的
+`4` 应替换成当前 Colab runtime 在 `0/2/4` 对照中实测最快且稳定的 worker 数。
 
 ## 7. 只在开发场景评估
 

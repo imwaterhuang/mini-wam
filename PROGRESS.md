@@ -36,13 +36,20 @@
 - 已冻结互不重叠的 20 个开发评估场景和 50 个最终测试场景；最终测试文件已标记为阶段 5 前禁止评测。
 - 20 回合随机策略基线已完成：成功率 `0%`，平均最终覆盖率 `0`，平均最大覆盖率 `0.120112`，平均回报 `1.223907`。
 - 未阻塞警告：macOS 运行模拟器时，OpenCV 与 Pygame 各自携带的 SDL（Simple DirectMedia Layer，跨平台多媒体库）会报告重复动态类；本轮 20 回合和全部测试均未崩溃，若后续出现图形相关异常再隔离依赖处理。
-- 当前下一步：把本轮前置修改推送到 GitHub，在 Colab GPU 上通过 `COLAB.md` 的预检与 100 步冒烟测试，然后启动种子 0 的 `action_only` 正式训练。
+- 按用户当前报告，正式训练已运行并把第 6000 步 checkpoint 保存到 Drive；当前工作从“能否启动”转为第 6000 步后的性能诊断与继续训练。该远程产物仍需通过同 runtime 的诊断结果核验。
 - `action_only_full.pt` 是早期 1000 步诊断模型，不视为正式阶段 3 模型；现有闭环运行尚无成功回合。
+- 用户报告正式训练已在 Colab 保存到第 6000 步；该远程 checkpoint 尚未在本地读取核验。训练耗时诊断显示，旧数据路径为每个 `action_only` 样本额外解码并拼接 4 张未使用的未来图像。
+- 已为 `MiniWAMDataset` 增加保持默认完整契约的 `include_future_observations` 模式；`action_only` 训练和验证固定关闭未来图像输出，不改变历史图像、位置、动作、mask、样本索引或配置文件。多批同索引检查和单元测试要求所有实际使用字段逐张量相等；当前完整回归为 `35 passed`。
+- 本机 warm-cache（缓存已预热）微基准在预热 5 批后交错测量 50 批：batch size 128 的旧完整取数平均 `133.72 ms/batch`，跳过未来图像后平均 `46.69 ms/batch`，数据阶段快 `2.86x`；55 批共 7040 个样本的全部实际使用字段逐张量完全一致。这不是 A100 最终结论；`scripts/profile_action_only.py` 用于在同一 Colab runtime 中分别实测取数、主机到设备传输、计算和端到端耗时。
+- sampler 已升级为“预取游标与已完成游标分离”：worker 请求 batch 不再推进 checkpoint 位置，只有 `optimizer.step()` 和 scheduler（学习率调度器）更新成功后才调用 `mark_consumed()`。新 sampler 状态带版本号，同时兼容旧版 `num_workers=0` checkpoint；worker seed 使用独立 generator，不推进模型训练的全局 PyTorch 随机状态。
+- 已在允许 PyTorch 共享内存的本机进程环境中验证 `num_workers=2/4`：预取不会改变 checkpoint 的下一批位置；含 Dropout（随机失活层）的 toy 训练在不中断与第 4 步中断恢复到第 9 步之间，样本顺序、每步 loss、模型、optimizer、scheduler 和最终 PyTorch 随机状态全部完全一致。
+- 真实 Mini-WAM 精简数据路径本机测量 20 批：`num_workers=0/2/4` 分别约为 `46.69/23.22/12.18 ms/batch`；2/4 workers 下完整与精简数据路径的实际使用字段仍完全一致。多进程结果依赖 Colab CPU 配额，A100 runtime 必须重新测量后再选 2 或 4。
+- 更新后的安全下一步：在 Colab 用 `scripts/profile_action_only.py --data-only` 分别测 `num_workers=0/2/4`，再用最快稳定值运行完整 profiler；通过后从第 6000 步旧 checkpoint 恢复。训练 sampler 已支持多 worker，验证仍保持 `num_workers=0`，避免为每 1000 步仅 19 批验证额外常驻一组 worker。
 
 当前新窗口续接提示：
 
 ```text
-请先读取 PROGRESS.md、SPEC.md、冻结的场景清单和随机策略报告。阶段 2 已完成，阶段 3 的可恢复训练、场景冻结和随机基线已验证。下一步核对正式训练硬件与配置，然后只启动种子 0 的 action_only 正式训练；不要开始 future_aware，也不要运行最终测试场景。
+请先读取 PROGRESS.md、SPEC.md、冻结的场景清单和随机策略报告。阶段 2 已完成，阶段 3 的种子 0 正式训练已由用户报告保存到第 6000 步。先在同一 A100 runtime 运行 action_only 性能诊断，确认精简数据模式的实际使用字段一致并量化加速，再从第 6000 步 checkpoint 继续；不要开始 future_aware，也不要运行最终测试场景。
 ```
 
 ## 已确定的项目约定
@@ -197,6 +204,7 @@
 - `scripts/download_dataset.py`、`scripts/check_training_ready.py`：数据获取与正式训练前置检查。
 - `scripts/evaluate_action_only.py`：正式 checkpoint 的开发集批量闭环评估；拒绝最终测试集。
 - `src/mini_wam/training/action_only.py`：验证、指标、checkpoint 和确定性采样实现。
+- `scripts/profile_action_only.py`：在不保存训练状态的独立进程中对比旧完整数据路径与 `action_only` 精简路径，并拆分数据、传输、计算和端到端耗时。
 - `tests/test_training.py`：配置与精确恢复测试。
 - `scripts/freeze_evaluation_scenes.py`：生成并保护 20/50 场景划分。
 - `scripts/evaluate_random_policy.py`：只允许在开发场景上运行的随机策略评测。

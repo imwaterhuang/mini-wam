@@ -44,7 +44,9 @@ def test_first_window_time_alignment(dataset: MiniWAMDataset) -> None:
     assert sample["start_step"].item() == 1
 
     raw_action = dataset.source[global_t]["action"].float()
-    recovered_action = dataset.normalization.denormalize_action(sample["action_chunk"][0])
+    recovered_action = dataset.normalization.denormalize_action(
+        sample["action_chunk"][0]
+    )
     assert torch.allclose(recovered_action, raw_action, atol=1e-4)
 
     raw_future = dataset.source[global_t + 1]["observation.image"].float()
@@ -55,7 +57,9 @@ def test_first_window_time_alignment(dataset: MiniWAMDataset) -> None:
 def test_tail_padding_stays_inside_episode(dataset: MiniWAMDataset) -> None:
     first_episode = dataset.source_indices(0)[0]
     tail_index = max(
-        index for index in range(len(dataset)) if dataset.source_indices(index)[0] == first_episode
+        index
+        for index in range(len(dataset))
+        if dataset.source_indices(index)[0] == first_episode
     )
     sample = dataset[tail_index]
     _, local_t, global_t, episode_end = dataset.source_indices(tail_index)
@@ -65,18 +69,51 @@ def test_tail_padding_stays_inside_episode(dataset: MiniWAMDataset) -> None:
     assert sample["action_valid_mask"].sum().item() == 1
     assert sample["future_valid_mask"].sum().item() == 1
     assert torch.count_nonzero(sample["action_chunk"][1:]).item() == 0
-    assert torch.equal(sample["future_observations"][1], sample["future_observations"][0])
-    assert torch.equal(sample["future_observations"][3], sample["future_observations"][0])
+    assert torch.equal(
+        sample["future_observations"][1], sample["future_observations"][0]
+    )
+    assert torch.equal(
+        sample["future_observations"][3], sample["future_observations"][0]
+    )
 
 
 def test_normalization_round_trip(dataset: MiniWAMDataset) -> None:
     positions = torch.tensor([[10.0, 20.0], [300.0, 400.0]])
     actions = torch.tensor([[30.0, 40.0], [500.0, 250.0]])
     stats = dataset.normalization
-    assert torch.allclose(stats.denormalize_position(stats.normalize_position(positions)), positions)
-    assert torch.allclose(stats.denormalize_action(stats.normalize_action(actions)), actions)
+    assert torch.allclose(
+        stats.denormalize_position(stats.normalize_position(positions)), positions
+    )
+    assert torch.allclose(
+        stats.denormalize_action(stats.normalize_action(actions)), actions
+    )
+
+
+def test_action_only_mode_skips_future_without_changing_used_fields(
+    dataset: MiniWAMDataset,
+) -> None:
+    action_only_dataset = MiniWAMDataset(
+        DATASET_ROOT,
+        [dataset.source_indices(0)[0]],
+        dataset.normalization,
+        include_future_observations=False,
+    )
+
+    full_sample = dataset[0]
+    action_only_sample = action_only_dataset[0]
+    assert "future_observations" not in action_only_sample
+    assert "future_valid_mask" not in action_only_sample
+    assert action_only_sample.keys() == {
+        "observation_history",
+        "agent_position",
+        "action_chunk",
+        "action_valid_mask",
+        "episode_id",
+        "start_step",
+    }
+    for key, value in action_only_sample.items():
+        assert torch.equal(value, full_sample[key]), key
 
 
 # Imported explicitly to make the image round-trip expectation readable.
 from mini_wam.data.dataset import IMAGENET_MEAN, IMAGENET_STD  # noqa: E402
-

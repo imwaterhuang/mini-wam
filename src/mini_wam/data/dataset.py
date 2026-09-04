@@ -6,8 +6,6 @@ import json
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
-
 import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -35,8 +33,12 @@ class NormalizationStats:
         audit = json.loads(Path(path).read_text(encoding="utf-8"))
         stats = audit["training_normalization"]
         return cls(
-            position_mean=torch.tensor(stats["agent_position"]["mean"], dtype=torch.float32),
-            position_std=torch.tensor(stats["agent_position"]["std"], dtype=torch.float32),
+            position_mean=torch.tensor(
+                stats["agent_position"]["mean"], dtype=torch.float32
+            ),
+            position_std=torch.tensor(
+                stats["agent_position"]["std"], dtype=torch.float32
+            ),
             action_mean=torch.tensor(stats["action"]["mean"], dtype=torch.float32),
             action_std=torch.tensor(stats["action"]["std"], dtype=torch.float32),
             std_floor=float(stats["std_floor"]),
@@ -80,6 +82,7 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
         normalization: NormalizationStats,
         action_horizon: int = 16,
         future_horizon: int = 4,
+        include_future_observations: bool = True,
     ) -> None:
         super().__init__()
         if action_horizon < 1 or future_horizon < 1:
@@ -89,10 +92,15 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
         self.normalization = normalization
         self.action_horizon = action_horizon
         self.future_horizon = future_horizon
+        self.include_future_observations = include_future_observations
 
         project_root = self.dataset_root.parents[2]
-        os.environ.setdefault("HF_HOME", str(project_root / "data" / ".cache" / "huggingface"))
-        os.environ.setdefault("HF_DATASETS_CACHE", str(project_root / "data" / ".cache" / "hf_datasets"))
+        os.environ.setdefault(
+            "HF_HOME", str(project_root / "data" / ".cache" / "huggingface")
+        )
+        os.environ.setdefault(
+            "HF_DATASETS_CACHE", str(project_root / "data" / ".cache" / "hf_datasets")
+        )
 
         from lerobot.datasets.lerobot_dataset import LeRobotDataset
 
@@ -116,11 +124,15 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
             ]
         )
         order = np.argsort(table["index"].to_numpy())
-        states = np.asarray(table["observation.state"].to_pylist(), dtype=np.float32)[order]
+        states = np.asarray(table["observation.state"].to_pylist(), dtype=np.float32)[
+            order
+        ]
         actions = np.asarray(table["action"].to_pylist(), dtype=np.float32)[order]
         return torch.from_numpy(states), torch.from_numpy(actions)
 
-    def _build_window_index(self, selected_episodes: set[int]) -> list[tuple[int, int, int, int]]:
+    def _build_window_index(
+        self, selected_episodes: set[int]
+    ) -> list[tuple[int, int, int, int]]:
         metadata = self.source.meta.episodes
         known_episodes = set(int(value) for value in metadata["episode_index"])
         unknown = selected_episodes - known_episodes
@@ -174,8 +186,21 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
         action_valid_mask = torch.zeros(self.action_horizon, dtype=torch.bool)
         if action_count:
             raw_actions = self._actions[global_t:valid_action_end]
-            action_chunk[:action_count] = self.normalization.normalize_action(raw_actions)
+            action_chunk[:action_count] = self.normalization.normalize_action(
+                raw_actions
+            )
             action_valid_mask[:action_count] = True
+
+        sample = {
+            "observation_history": observation_history,
+            "agent_position": agent_position,
+            "action_chunk": action_chunk,
+            "action_valid_mask": action_valid_mask,
+            "episode_id": torch.tensor(episode_id, dtype=torch.int64),
+            "start_step": torch.tensor(local_t, dtype=torch.int64),
+        }
+        if not self.include_future_observations:
+            return sample
 
         valid_future_end = min(global_t + 1 + self.future_horizon, episode_end)
         future_rows = list(range(global_t + 1, valid_future_end))
@@ -183,23 +208,22 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
         future_valid_mask = torch.zeros(self.future_horizon, dtype=torch.bool)
         future_valid_mask[:future_count] = True
         future_images = [
-            self._normalize_image(self.source[row]["observation.image"]) for row in future_rows
+            self._normalize_image(self.source[row]["observation.image"])
+            for row in future_rows
         ]
         if not future_images:
-            raise RuntimeError("A window was created without a valid future observation")
-        future_images.extend([future_images[-1].clone() for _ in range(self.future_horizon - future_count)])
-        future_observations = torch.stack(future_images)
-
-        return {
-            "observation_history": observation_history,
-            "agent_position": agent_position,
-            "action_chunk": action_chunk,
-            "action_valid_mask": action_valid_mask,
-            "future_observations": future_observations,
-            "future_valid_mask": future_valid_mask,
-            "episode_id": torch.tensor(episode_id, dtype=torch.int64),
-            "start_step": torch.tensor(local_t, dtype=torch.int64),
-        }
+            raise RuntimeError(
+                "A window was created without a valid future observation"
+            )
+        future_images.extend(
+            [
+                future_images[-1].clone()
+                for _ in range(self.future_horizon - future_count)
+            ]
+        )
+        sample["future_observations"] = torch.stack(future_images)
+        sample["future_valid_mask"] = future_valid_mask
+        return sample
 
     def source_indices(self, index: int) -> tuple[int, int, int, int]:
         """Expose window metadata for correctness tests and debugging."""

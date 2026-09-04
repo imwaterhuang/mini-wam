@@ -11,16 +11,22 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 os.environ.setdefault("HF_HOME", str(PROJECT_ROOT / "data" / ".cache" / "huggingface"))
-os.environ.setdefault("HF_DATASETS_CACHE", str(PROJECT_ROOT / "data" / ".cache" / "hf_datasets"))
+os.environ.setdefault(
+    "HF_DATASETS_CACHE", str(PROJECT_ROOT / "data" / ".cache" / "hf_datasets")
+)
 
-from mini_wam.training import train_action_only
+from mini_wam.training import train_action_only  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="训练或恢复 Mini-WAM action_only 基线")
     parser.add_argument("--config", required=True, type=Path, help="YAML 训练配置")
-    parser.add_argument("--resume", type=Path, help="从 last.pt 或其他正式 checkpoint 恢复")
-    parser.add_argument("--run-dir", type=Path, help="新训练的输出目录；恢复时通常无需指定")
+    parser.add_argument(
+        "--resume", type=Path, help="从 last.pt 或其他正式 checkpoint 恢复"
+    )
+    parser.add_argument(
+        "--run-dir", type=Path, help="新训练的输出目录；恢复时通常无需指定"
+    )
     parser.add_argument(
         "--mirror-dir",
         type=Path,
@@ -32,6 +38,12 @@ def parse_args() -> argparse.Namespace:
         help="仅用于可恢复性检查：提前停在指定全局训练步",
     )
     parser.add_argument("--device", default="auto", help="auto、cpu、mps 或 cuda")
+    parser.add_argument(
+        "--num-workers",
+        type=int,
+        default=4,
+        help="DataLoader 并行工作进程数；先用 0/2/4 实测后选择",
+    )
     return parser.parse_args()
 
 
@@ -44,6 +56,7 @@ def main() -> None:
         mirror_dir=args.mirror_dir,
         stop_after_step=args.stop_after_step,
         device_name=args.device,
+        num_workers=args.num_workers,
     )
     print(f"训练产物：{run_dir}")
 
