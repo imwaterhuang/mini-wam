@@ -1,0 +1,4 @@
+# Colab already provides a CUDA-enabled PyTorch build. Do not replace it here.
+lerobot[pusht]==0.6.0
+PyYAML==6.0.3
+pytest>=8.4,<10

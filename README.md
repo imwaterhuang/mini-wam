@@ -2,6 +2,9 @@
 
 > 详细阶段进度与新窗口续接说明：[PROGRESS.md](PROGRESS.md)
 
+> Colab 的安装、数据下载、Drive 镜像、恢复训练与开发集评估：
+> [COLAB.md](COLAB.md)
+
 在 Push-T 上公平比较 `action_only` 与带训练期未来表示辅助任务的
 `future_aware`。完整模型和评估边界见 [SPEC.md](SPEC.md) 与
 [EVALUATION.md](EVALUATION.md)。
@@ -149,6 +152,17 @@ conda run -p ./.venv pytest tests/test_dataset.py -q
 平均最大覆盖率约 `0.120112`，平均回报约 `1.223907`。逐回合结果位于
 `reports/baselines/random_policy_development.json` 和对应 CSV（Comma-Separated
 Values，逗号分隔值）文件。
+
+训练完成后，使用冻结开发场景批量评估 `best.pt`：
+
+```bash
+./.venv/bin/python scripts/evaluate_action_only.py \
+  --checkpoint runs/action_only/0/<run>/checkpoints/best.pt \
+  --output-dir reports/action_only/seed0-development \
+  --device auto
+```
+
+该入口会拒绝最终测试场景，并输出逐回合指标、汇总结果和全部回合视频。
 
 ## 固定版本
 

@@ -29,11 +29,14 @@
 - 当前阶段：阶段 3——`action_only` 闭环基线。
 - 阶段 2 已通过：64 样本损失从 `0.423381` 降至 `0.006625`，下降约 98.4%；checkpoint 重新加载输出一致。
 - 可恢复训练基础设施已完成：正式配置、smoke test 配置、训练/验证指标、完整 checkpoint 和确定性数据采样恢复。
+- Colab 前置流程已补齐：专用依赖、数据下载与校验、CUDA/数据/Drive 写入预检、本地高速训练加 Drive 增量镜像、断线恢复命令。
+- 已补充 `action_only` 正式批量闭环评估入口；固定使用验证损失最低的 `best.pt`，只允许 20 个开发场景，输出指标、资源占用和全部视频。
+- 前置实现已完成本地验收：`34 passed`；数据下载脚本在已有数据上确认 206 回合、25,650 帧；训练从本地第 2 步镜像到持久化目录后，在全新本地目录精确恢复到第 4 步；临时 checkpoint 已跑通 20 个开发场景、20 个视频和汇总结果的短评估。
 - 已实测从第 50 步恢复到第 100 步；恢复训练与不中断训练的最终模型参数逐张量完全一致，学习率调度器和采样器状态也一致。
 - 已冻结互不重叠的 20 个开发评估场景和 50 个最终测试场景；最终测试文件已标记为阶段 5 前禁止评测。
 - 20 回合随机策略基线已完成：成功率 `0%`，平均最终覆盖率 `0`，平均最大覆盖率 `0.120112`，平均回报 `1.223907`。
 - 未阻塞警告：macOS 运行模拟器时，OpenCV 与 Pygame 各自携带的 SDL（Simple DirectMedia Layer，跨平台多媒体库）会报告重复动态类；本轮 20 回合和全部测试均未崩溃，若后续出现图形相关异常再隔离依赖处理。
-- 当前下一步：核对正式训练硬件与配置，然后启动种子 0 的 `action_only` 正式训练。
+- 当前下一步：把本轮前置修改推送到 GitHub，在 Colab GPU 上通过 `COLAB.md` 的预检与 100 步冒烟测试，然后启动种子 0 的 `action_only` 正式训练。
 - `action_only_full.pt` 是早期 1000 步诊断模型，不视为正式阶段 3 模型；现有闭环运行尚无成功回合。
 
 当前新窗口续接提示：
@@ -190,6 +193,9 @@
 - `configs/action_only_smoke.yaml`：100 步本地恢复测试配置。
 - `configs/action_only_seed0.yaml`：50,000 步正式种子 0 配置，尚未启动正式训练。
 - `scripts/train_action_only.py`：训练与恢复入口。
+- `requirements-colab.txt`、`COLAB.md`：Colab 安装、训练、恢复和评估流程。
+- `scripts/download_dataset.py`、`scripts/check_training_ready.py`：数据获取与正式训练前置检查。
+- `scripts/evaluate_action_only.py`：正式 checkpoint 的开发集批量闭环评估；拒绝最终测试集。
 - `src/mini_wam/training/action_only.py`：验证、指标、checkpoint 和确定性采样实现。
 - `tests/test_training.py`：配置与精确恢复测试。
 - `scripts/freeze_evaluation_scenes.py`：生成并保护 20/50 场景划分。

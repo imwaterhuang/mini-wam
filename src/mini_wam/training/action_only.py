@@ -80,6 +80,14 @@ def load_training_config(path: str | Path) -> dict[str, Any]:
     for key in positive_ints:
         if _require(raw, key, int) < 1:
             raise ValueError(f"配置 {key} 必须为正数")
+    archive_frequency = raw["checkpoint"].get("archive_frequency")
+    if archive_frequency is not None and (
+        not isinstance(archive_frequency, int)
+        or isinstance(archive_frequency, bool)
+        or archive_frequency < raw["checkpoint"]["frequency"]
+        or archive_frequency % raw["checkpoint"]["frequency"] != 0
+    ):
+        raise ValueError("checkpoint.archive_frequency 必须是 frequency 的正整数倍")
     _require(raw, "training.seed", int)
     for key in ("training.learning_rate", "training.gradient_clip_norm"):
         if _require(raw, key, float) <= 0:
@@ -373,11 +381,38 @@ def _log(run_dir: Path, message: str) -> None:
         handle.write(message + "\n")
 
 
+def _sync_run_directory(source: Path, destination: Path) -> None:
+    """Incrementally mirror a run directory to persistent storage."""
+    if source.resolve() == destination.resolve():
+        return
+    destination.mkdir(parents=True, exist_ok=True)
+    for source_path in source.rglob("*"):
+        relative = source_path.relative_to(source)
+        destination_path = destination / relative
+        if source_path.is_dir():
+            destination_path.mkdir(parents=True, exist_ok=True)
+            continue
+        destination_path.parent.mkdir(parents=True, exist_ok=True)
+        should_copy = not destination_path.exists()
+        if not should_copy:
+            source_stat = source_path.stat()
+            destination_stat = destination_path.stat()
+            should_copy = (
+                source_stat.st_size != destination_stat.st_size
+                or source_stat.st_mtime_ns != destination_stat.st_mtime_ns
+            )
+        if should_copy:
+            temporary = destination_path.with_suffix(destination_path.suffix + ".sync-tmp")
+            shutil.copy2(source_path, temporary)
+            temporary.replace(destination_path)
+
+
 def train_action_only(
     config_path: str | Path,
     *,
     resume_path: str | Path | None = None,
     run_dir: str | Path | None = None,
+    mirror_dir: str | Path | None = None,
     stop_after_step: int | None = None,
     device_name: str = "auto",
 ) -> Path:
@@ -402,10 +437,17 @@ def train_action_only(
         device = torch.device(device_name)
 
     resume = Path(resume_path).expanduser().resolve() if resume_path else None
+    mirror_path = Path(mirror_dir).expanduser().resolve() if mirror_dir else None
     if resume and run_dir is None:
         run_path = resume.parent.parent
     else:
         run_path = Path(run_dir).expanduser().resolve() if run_dir else _default_run_dir(seed)
+    if resume and mirror_path and run_path != mirror_path and mirror_path.exists() and not run_path.exists():
+        shutil.copytree(mirror_path, run_path)
+        if resume.is_relative_to(mirror_path):
+            mirrored_resume = run_path / resume.relative_to(mirror_path)
+            if mirrored_resume.exists():
+                resume = mirrored_resume
     run_path.mkdir(parents=True, exist_ok=True)
     (run_path / "checkpoints").mkdir(exist_ok=True)
 
@@ -482,8 +524,11 @@ def train_action_only(
         json.dumps(_normalization_dict(stats), ensure_ascii=False, indent=2), encoding="utf-8"
     )
     _log(run_path, f"device={device} step={step} target_step={target_step} run_dir={run_path}")
+    if mirror_path:
+        _sync_run_directory(run_path, mirror_path)
 
     checkpoint_frequency = int(config["checkpoint"]["frequency"])
+    archive_frequency = int(config["checkpoint"].get("archive_frequency", checkpoint_frequency))
     validation_frequency = int(config["validation"]["frequency"])
     max_validation_batches = config["validation"].get("max_batches")
     iterator = iter(train_loader)
@@ -547,6 +592,8 @@ def train_action_only(
                     environment=environment,
                 )
                 _atomic_torch_save(payload, run_path / "checkpoints" / "best.pt")
+            if mirror_path:
+                _sync_run_directory(run_path, mirror_path)
 
         if step % checkpoint_frequency == 0 or step == target_step:
             payload = _checkpoint_payload(
@@ -563,8 +610,13 @@ def train_action_only(
                 dataset_fingerprint=dataset_fingerprint,
                 environment=environment,
             )
-            _atomic_torch_save(payload, run_path / "checkpoints" / f"step_{step:07d}.pt")
             _atomic_torch_save(payload, run_path / "checkpoints" / "last.pt")
+            if step % archive_frequency == 0 or step == train_steps:
+                _atomic_torch_save(payload, run_path / "checkpoints" / f"step_{step:07d}.pt")
+            if mirror_path:
+                _sync_run_directory(run_path, mirror_path)
 
     _log(run_path, f"completed target step {target_step}")
+    if mirror_path:
+        _sync_run_directory(run_path, mirror_path)
     return run_path

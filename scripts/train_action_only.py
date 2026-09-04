@@ -22,6 +22,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--resume", type=Path, help="从 last.pt 或其他正式 checkpoint 恢复")
     parser.add_argument("--run-dir", type=Path, help="新训练的输出目录；恢复时通常无需指定")
     parser.add_argument(
+        "--mirror-dir",
+        type=Path,
+        help="可选持久化镜像目录；Colab 中建议指向 Google Drive",
+    )
+    parser.add_argument(
         "--stop-after-step",
         type=int,
         help="仅用于可恢复性检查：提前停在指定全局训练步",
@@ -36,6 +41,7 @@ def main() -> None:
         args.config,
         resume_path=args.resume,
         run_dir=args.run_dir,
+        mirror_dir=args.mirror_dir,
         stop_after_step=args.stop_after_step,
         device_name=args.device,
     )
@@ -44,4 +50,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

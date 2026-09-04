@@ -9,6 +9,7 @@ from mini_wam.training.action_only import (
     DeterministicBatchSampler,
     _capture_random_states,
     _restore_random_states,
+    _sync_run_directory,
     load_training_config,
 )
 
@@ -23,6 +24,26 @@ def test_smoke_and_formal_configs_are_valid() -> None:
     assert smoke["model"]["pretrained"] is False
     assert formal["training"]["train_steps"] == 50_000
     assert formal["model"]["pretrained"] is True
+    assert formal["checkpoint"]["frequency"] == 1_000
+    assert formal["checkpoint"]["archive_frequency"] == 5_000
+
+
+def test_run_directory_mirror_updates_changed_files(tmp_path: Path) -> None:
+    source = tmp_path / "local"
+    destination = tmp_path / "persistent"
+    (source / "checkpoints").mkdir(parents=True)
+    (source / "train_metrics.csv").write_text("step,loss\n1,0.5\n", encoding="utf-8")
+    (source / "checkpoints" / "last.pt").write_bytes(b"first")
+    _sync_run_directory(source, destination)
+    assert (destination / "train_metrics.csv").read_text(encoding="utf-8").endswith("1,0.5\n")
+    assert (destination / "checkpoints" / "last.pt").read_bytes() == b"first"
+
+    (source / "train_metrics.csv").write_text("step,loss\n1,0.5\n2,0.4\n", encoding="utf-8")
+    (source / "checkpoints" / "last.pt").write_bytes(b"second-version")
+    _sync_run_directory(source, destination)
+    assert (destination / "train_metrics.csv").read_text(encoding="utf-8").endswith("2,0.4\n")
+    assert (destination / "checkpoints" / "last.pt").read_bytes() == b"second-version"
+    assert not list(destination.rglob("*.sync-tmp"))
 
 
 def test_sampler_resumes_at_the_exact_next_batch() -> None:

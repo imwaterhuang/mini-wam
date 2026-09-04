@@ -1,9 +1,11 @@
 .DS_Store
-.venv/
+/.venv/
 __pycache__/
-.pytest_cache/
+/.pytest_cache/
+/build/
+*.egg-info/
 
-artifacts/*
+/artifacts/*
 !artifacts/data_audit.json
 
 *.pt
@@ -12,7 +14,7 @@ artifacts/*
 *.zip
 .env
 
-data/
-outputs/
-checkpoints/
-runs/
+/data/
+/outputs/
+/checkpoints/
+/runs/

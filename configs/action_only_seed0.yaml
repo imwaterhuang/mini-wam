@@ -24,5 +24,5 @@ validation:
   max_batches: null
 
 checkpoint:
-  frequency: 5000
-
+  frequency: 1000
+  archive_frequency: 5000
