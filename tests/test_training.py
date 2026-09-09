@@ -11,12 +11,12 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader, Dataset, TensorDataset
 
-from mini_wam.training.action_only import (
+from mini_wam.training.artifacts import sync_run_directory
+from mini_wam.training.config import load_training_config
+from mini_wam.training.reproducibility import (
     DeterministicBatchSampler,
-    _capture_random_states,
-    _restore_random_states,
-    _sync_run_directory,
-    load_training_config,
+    capture_random_states,
+    restore_random_states,
 )
 
 
@@ -50,7 +50,7 @@ def test_run_directory_mirror_updates_changed_files(tmp_path: Path) -> None:
     (source / "checkpoints").mkdir(parents=True)
     (source / "train_metrics.csv").write_text("step,loss\n1,0.5\n", encoding="utf-8")
     (source / "checkpoints" / "last.pt").write_bytes(b"first")
-    _sync_run_directory(source, destination)
+    sync_run_directory(source, destination)
     assert (
         (destination / "train_metrics.csv")
         .read_text(encoding="utf-8")
@@ -62,7 +62,7 @@ def test_run_directory_mirror_updates_changed_files(tmp_path: Path) -> None:
         "step,loss\n1,0.5\n2,0.4\n", encoding="utf-8"
     )
     (source / "checkpoints" / "last.pt").write_bytes(b"second-version")
-    _sync_run_directory(source, destination)
+    sync_run_directory(source, destination)
     assert (
         (destination / "train_metrics.csv")
         .read_text(encoding="utf-8")
@@ -282,13 +282,13 @@ def test_multiworker_interrupted_resume_matches_uninterrupted(num_workers: int) 
 def test_random_states_are_safe_to_load_and_restore(tmp_path: Path) -> None:
     checkpoint = tmp_path / "random_states.pt"
     torch.manual_seed(13)
-    states = _capture_random_states()
+    states = capture_random_states()
     torch.save({"random_states": states}, checkpoint)
 
     loaded = torch.load(checkpoint, weights_only=True)
-    _restore_random_states(loaded["random_states"])
+    restore_random_states(loaded["random_states"])
     expected = torch.rand(4)
-    _restore_random_states(loaded["random_states"])
+    restore_random_states(loaded["random_states"])
     actual = torch.rand(4)
 
     assert torch.equal(actual, expected)

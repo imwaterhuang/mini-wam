@@ -1,14 +1,4 @@
-"""ActionOnlyPolicy 的可复现训练总流程。
-
-本模块只负责装配数据、模型、恢复、训练、验证和保存。具体职责位于：
-
-- ``config``：配置校验与项目路径；
-- ``reproducibility``：确定性采样与随机状态；
-- ``steps``：单步优化、学习率调度与离线验证；
-- ``artifacts``：指标、checkpoint（检查点）、实验身份和目录镜像。
-
-文件末尾保留少量旧私有名称别名，兼容已有脚本与 notebook（交互式笔记本）。
-"""
+"""FutureHeadPolicy 的可恢复训练总流程。"""
 
 from __future__ import annotations
 
@@ -21,7 +11,7 @@ from typing import Any
 
 import torch
 
-from mini_wam.models.action_only import ActionOnlyPolicy
+from mini_wam.models.future_head import FutureHeadPolicy
 from mini_wam.studio.datasets import validate_dataset
 
 from .artifacts import (
@@ -36,19 +26,15 @@ from .artifacts import (
     sha256_file,
     sync_run_directory,
 )
-from .config import PROJECT_ROOT, load_training_config, resolve_project_path
+from .config import PROJECT_ROOT, load_training_config
 from .data import build_training_data
-from .reproducibility import (
-    DeterministicBatchSampler,
-    capture_random_states,
-    restore_random_states,
-    seed_everything,
-)
+from .future_head import evaluate, train_step
+from .reproducibility import restore_random_states, seed_everything
 from .runtime import select_device
-from .steps import evaluate, make_scheduler, train_step
+from .steps import make_scheduler
 
 
-def train_action_only(
+def train_future_aware(
     config_path: str | Path,
     *,
     resume_path: str | Path | None = None,
@@ -58,12 +44,16 @@ def train_action_only(
     device_name: str = "auto",
     num_workers: int = 0,
 ) -> Path:
-    """训练、验证、保存并可选恢复 ActionOnlyPolicy。"""
+    """训练、验证、保存并可选恢复 FutureHeadPolicy。"""
     config_path = Path(config_path).expanduser().resolve()
-    config = load_training_config(config_path)
+    config = load_training_config(
+        config_path,
+        expected_model_name="future_aware",
+    )
     training = config["training"]
     seed = int(training["seed"])
     train_steps = int(training["train_steps"])
+    lambda_future = float(training["lambda_future"])
     if stop_after_step is not None and not 1 <= stop_after_step <= train_steps:
         raise ValueError("stop_after_step 必须在 [1, train_steps] 内")
     if num_workers < 0:
@@ -73,7 +63,7 @@ def train_action_only(
 
     resume, run_path, mirror_path = prepare_run_directory(
         seed=seed,
-        model_name="action_only",
+        model_name="future_aware",
         resume_path=resume_path,
         run_dir=run_dir,
         mirror_dir=mirror_dir,
@@ -90,18 +80,13 @@ def train_action_only(
         config=config,
         seed=seed,
         num_workers=num_workers,
-        include_future_observations=False,
+        include_future_observations=True,
     )
-    stats = data.stats
-    dataset_root = data.dataset_root
-    split_path = data.split_path
-    sampler = data.sampler
-    train_loader = data.train_loader
-    validation_loader = data.validation_loader
-
-    model = ActionOnlyPolicy(pretrained=bool(config["model"]["pretrained"])).to(device)
+    model = FutureHeadPolicy(
+        pretrained=bool(config["model"]["pretrained"])
+    ).to(device)
     optimizer = torch.optim.AdamW(
-        model.parameters(),
+        (parameter for parameter in model.parameters() if parameter.requires_grad),
         lr=float(training["learning_rate"]),
         weight_decay=float(training["weight_decay"]),
     )
@@ -117,9 +102,9 @@ def train_action_only(
         "prefetch_factor": 2 if num_workers > 0 else None,
         "persistent_workers": num_workers > 0,
     }
-    split_hash = sha256_file(split_path)
+    split_hash = sha256_file(data.split_path)
     dataset_fingerprint = validate_dataset(
-        dataset_root, "lerobot/pusht_image"
+        data.dataset_root, "lerobot/pusht_image"
     ).fingerprint
     best_validation_loss = math.inf
     last_validation_loss: float | None = None
@@ -133,10 +118,12 @@ def train_action_only(
             raise ValueError("恢复失败：当前配置与 checkpoint 配置不同")
         if checkpoint.get("split_hash") != split_hash:
             raise ValueError("恢复失败：数据划分已经变化")
+        if checkpoint.get("metadata", {}).get("architecture") != "future_aware_v1":
+            raise ValueError("恢复失败：checkpoint 不是 future_aware_v1")
         model.load_state_dict(checkpoint["model"], strict=True)
         optimizer.load_state_dict(checkpoint["optimizer"])
         scheduler.load_state_dict(checkpoint["scheduler"])
-        sampler.load_state_dict(checkpoint["sampler"])
+        data.sampler.load_state_dict(checkpoint["sampler"])
         step = int(checkpoint["step"])
         best_validation_loss = float(checkpoint["best_validation_loss"])
         last_validation_loss = checkpoint.get("validation_loss")
@@ -152,13 +139,13 @@ def train_action_only(
         json.dumps(environment, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     (run_path / "normalization.json").write_text(
-        json.dumps(normalization_dict(stats), ensure_ascii=False, indent=2),
+        json.dumps(normalization_dict(data.stats), ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
     log(
         run_path,
         f"device={device} num_workers={num_workers} step={step} "
-        f"target_step={target_step} run_dir={run_path}",
+        f"target_step={target_step} lambda_future={lambda_future} run_dir={run_path}",
     )
     if mirror_path:
         sync_run_directory(run_path, mirror_path)
@@ -169,61 +156,82 @@ def train_action_only(
     )
     validation_frequency = int(config["validation"]["frequency"])
     max_validation_batches = config["validation"].get("max_batches")
-    iterator = iter(train_loader)
+    iterator = iter(data.train_loader)
 
     def current_checkpoint() -> dict[str, Any]:
         return checkpoint_payload(
             model=model,
             optimizer=optimizer,
             scheduler=scheduler,
-            sampler=sampler,
+            sampler=data.sampler,
             step=step,
             config=config,
             best_validation_loss=best_validation_loss,
             validation_loss=last_validation_loss,
-            stats=stats,
+            stats=data.stats,
             split_hash=split_hash,
             dataset_fingerprint=dataset_fingerprint,
             environment=environment,
+            architecture="future_aware_v1",
+            metadata_extra={
+                "future_horizon": 4,
+                "future_feature_dim": 512,
+                "lambda_future": lambda_future,
+                "future_supervision": "training_only",
+            },
         )
 
     while step < target_step:
-        batch = next(iterator)
-        loss_value, gradient_norm = train_step(
+        metrics = train_step(
             model=model,
-            batch=batch,
+            batch=next(iterator),
             optimizer=optimizer,
             scheduler=scheduler,
-            sampler=sampler,
+            sampler=data.sampler,
             device=device,
+            lambda_future=lambda_future,
             gradient_clip_norm=float(training["gradient_clip_norm"]),
             next_step=step + 1,
         )
         step += 1
         append_csv(
             run_path / "train_metrics.csv",
-            ["step", "loss", "learning_rate", "gradient_norm"],
+            [
+                "step",
+                "total_loss",
+                "action_loss",
+                "future_loss",
+                "learning_rate",
+                "gradient_norm",
+            ],
             {
                 "step": step,
-                "loss": loss_value,
+                **metrics,
                 "learning_rate": optimizer.param_groups[0]["lr"],
-                "gradient_norm": gradient_norm,
             },
         )
 
         if step % validation_frequency == 0 or step == target_step:
-            last_validation_loss = evaluate(
+            validation = evaluate(
                 model,
-                validation_loader,
+                data.validation_loader,
                 device,
                 max_validation_batches,
+                lambda_future,
             )
+            last_validation_loss = validation["total_loss"]
             append_csv(
                 run_path / "val_metrics.csv",
-                ["step", "validation_loss", "batches"],
+                [
+                    "step",
+                    "total_loss",
+                    "action_loss",
+                    "future_loss",
+                    "batches",
+                ],
                 {
                     "step": step,
-                    "validation_loss": last_validation_loss,
+                    **validation,
                     "batches": (
                         max_validation_batches
                         if max_validation_batches is not None
@@ -233,8 +241,10 @@ def train_action_only(
             )
             log(
                 run_path,
-                f"step={step} train_loss={loss_value:.6f} "
-                f"val_loss={last_validation_loss:.6f}",
+                f"step={step} train_total={metrics['total_loss']:.6f} "
+                f"val_total={validation['total_loss']:.6f} "
+                f"val_action={validation['action_loss']:.6f} "
+                f"val_future={validation['future_loss']:.6f}",
             )
             if last_validation_loss < best_validation_loss:
                 best_validation_loss = last_validation_loss
@@ -259,10 +269,3 @@ def train_action_only(
     if mirror_path:
         sync_run_directory(run_path, mirror_path)
     return run_path
-
-
-# 兼容已有脚本和测试；新代码应直接从对应职责模块导入。
-_resolve_project_path = resolve_project_path
-_capture_random_states = capture_random_states
-_restore_random_states = restore_random_states
-_sync_run_directory = sync_run_directory

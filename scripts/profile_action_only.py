@@ -26,7 +26,10 @@ os.environ.setdefault(
 
 from mini_wam.data import MiniWAMDataset, NormalizationStats, load_episode_split  # noqa: E402
 from mini_wam.models.action_only import ActionOnlyPolicy, masked_smooth_l1_loss  # noqa: E402
-from mini_wam.training.action_only import _resolve_project_path, load_training_config  # noqa: E402
+from mini_wam.training.config import (  # noqa: E402
+    load_training_config,
+    resolve_project_path,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -192,10 +195,10 @@ def main() -> None:
     data_config = config["data"]
     training = config["training"]
     device = _device(args.device)
-    dataset_root = _resolve_project_path(data_config["dataset_root"])
-    split_path = _resolve_project_path(data_config["split_path"])
+    dataset_root = resolve_project_path(data_config["dataset_root"])
+    split_path = resolve_project_path(data_config["split_path"])
     stats = NormalizationStats.from_audit_file(
-        _resolve_project_path(data_config["normalization_path"])
+        resolve_project_path(data_config["normalization_path"])
     )
     common = {
         "dataset_root": dataset_root,

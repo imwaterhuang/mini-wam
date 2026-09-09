@@ -232,7 +232,7 @@ L_total = L_action
 
 - 只读取 `action_chunk[:, :4]`。
 - 每步二维动作通过共享 MLP 编码为 64 维。
-- 加入四个可学习时间位置向量，展平后得到 `[B, 256]`。
+- 加入固定的 sine-cosine positional encoding（正弦余弦位置编码），展平后得到 `[B, 256]`。
 
 #### FutureHead
 

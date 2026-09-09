@@ -16,7 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from mini_wam.studio.datasets import validate_dataset
-from mini_wam.training.action_only import load_training_config
+from mini_wam.training.config import load_training_config
 
 
 def parse_args() -> argparse.Namespace:
