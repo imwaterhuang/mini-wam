@@ -1,0 +1,28 @@
+model:
+  name: action_only
+  pretrained: true
+
+data:
+  dataset_root: data/lerobot/pusht_image
+  split_path: splits/episodes_seed42.json
+  normalization_path: artifacts/data_audit.json
+  history_length: 2
+  action_horizon: 16
+  future_horizon: 4
+
+training:
+  seed: 0
+  batch_size: 128
+  train_steps: 50000
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  warmup_steps: 1000
+  gradient_clip_norm: 1.0
+
+validation:
+  frequency: 1000
+  max_batches: null
+
+checkpoint:
+  frequency: 1000
+  archive_frequency: 5000

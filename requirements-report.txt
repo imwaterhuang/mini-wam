@@ -1,0 +1,2 @@
+# Optional static report figures; not needed for the standard-library evidence audit.
+matplotlib>=3.9,<4

@@ -1,0 +1,15 @@
+{
+  "python": "3.13.15",
+  "pytorch": "2.11.0+cu128",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+  "device": "cuda",
+  "cuda_available": true,
+  "git_commit": "9bb6c1c128cdaee3002a15ce2c588c2ffdd5b4a2",
+  "source_fingerprint": "7f9a5bcc614f9ba508de5e4db054c10a9ca3741c54b738c6c12949c57ef1f9c6",
+  "data_loader": {
+    "train_num_workers": 4,
+    "validation_num_workers": 0,
+    "prefetch_factor": 2,
+    "persistent_workers": true
+  }
+}

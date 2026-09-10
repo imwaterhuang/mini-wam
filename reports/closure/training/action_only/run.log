@@ -1,0 +1,55 @@
+device=cuda step=0 target_step=50000 run_dir=/content/mini-wam-work/action-only-seed0
+step=1000 train_loss=0.016836 val_loss=0.079565
+step=2000 train_loss=0.009455 val_loss=0.072491
+step=3000 train_loss=0.004823 val_loss=0.069938
+device=cuda step=3000 target_step=50000 run_dir=/content/mini-wam-work/action-only-seed0
+step=4000 train_loss=0.004036 val_loss=0.068205
+step=5000 train_loss=0.002730 val_loss=0.065951
+device=cuda step=5000 target_step=50000 run_dir=/content/mini-wam-work/action-only-seed0
+step=6000 train_loss=0.002727 val_loss=0.064815
+device=cuda num_workers=4 step=6000 target_step=50000 run_dir=/content/mini-wam-work/action-only-seed0
+step=7000 train_loss=0.003526 val_loss=0.065001
+step=8000 train_loss=0.001822 val_loss=0.065939
+step=9000 train_loss=0.002110 val_loss=0.064180
+step=10000 train_loss=0.002170 val_loss=0.061950
+step=11000 train_loss=0.001252 val_loss=0.066678
+step=12000 train_loss=0.001457 val_loss=0.065717
+step=13000 train_loss=0.001260 val_loss=0.067629
+step=14000 train_loss=0.001329 val_loss=0.064572
+step=15000 train_loss=0.001063 val_loss=0.064937
+step=16000 train_loss=0.001186 val_loss=0.064565
+step=17000 train_loss=0.001151 val_loss=0.067818
+step=18000 train_loss=0.000835 val_loss=0.065031
+step=19000 train_loss=0.000749 val_loss=0.066250
+step=20000 train_loss=0.000790 val_loss=0.063083
+step=21000 train_loss=0.000617 val_loss=0.064940
+step=22000 train_loss=0.000539 val_loss=0.064137
+step=23000 train_loss=0.000528 val_loss=0.064336
+step=24000 train_loss=0.000574 val_loss=0.065184
+step=25000 train_loss=0.000425 val_loss=0.064335
+step=26000 train_loss=0.000456 val_loss=0.064220
+step=27000 train_loss=0.000371 val_loss=0.063802
+step=28000 train_loss=0.000315 val_loss=0.064296
+step=29000 train_loss=0.000313 val_loss=0.064095
+step=30000 train_loss=0.000302 val_loss=0.064251
+step=31000 train_loss=0.000275 val_loss=0.064155
+step=32000 train_loss=0.000277 val_loss=0.064506
+step=33000 train_loss=0.000233 val_loss=0.064921
+step=34000 train_loss=0.000238 val_loss=0.064313
+step=35000 train_loss=0.000162 val_loss=0.063606
+step=36000 train_loss=0.000174 val_loss=0.064243
+step=37000 train_loss=0.000158 val_loss=0.064263
+step=38000 train_loss=0.000155 val_loss=0.064138
+step=39000 train_loss=0.000150 val_loss=0.064561
+step=40000 train_loss=0.000138 val_loss=0.063933
+step=41000 train_loss=0.000141 val_loss=0.063934
+step=42000 train_loss=0.000109 val_loss=0.064280
+step=43000 train_loss=0.000123 val_loss=0.064562
+step=44000 train_loss=0.000124 val_loss=0.064259
+step=45000 train_loss=0.000114 val_loss=0.064039
+step=46000 train_loss=0.000145 val_loss=0.064453
+step=47000 train_loss=0.000112 val_loss=0.064272
+step=48000 train_loss=0.000115 val_loss=0.064225
+step=49000 train_loss=0.000135 val_loss=0.064282
+step=50000 train_loss=0.000112 val_loss=0.064207
+completed target step 50000

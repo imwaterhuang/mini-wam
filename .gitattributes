@@ -1,0 +1,4 @@
+# Preserve cloud evidence byte-for-byte (including CSV carriage returns).
+reports/closure/** -text whitespace=cr-at-eol
+*.png binary
+*.mp4 binary

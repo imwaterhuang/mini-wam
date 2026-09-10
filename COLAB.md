@@ -1,5 +1,9 @@
 # Mini-WAM Colab 正式训练
 
+> 本项目已作为单随机种子探索性实验收尾。本文保留训练/恢复操作说明，不表示应启动新训练。
+> 核对已有结果及重新评估请使用 [docs/REPRODUCING.md](docs/REPRODUCING.md)。
+> 两种模型均按最低离线验证损失选点，开发闭环不重新选择检查点；封存测试未使用。
+
 本流程让训练在 Colab 的本地磁盘高速运行，并在每次验证和 checkpoint
 （训练检查点）保存后，把完整运行目录增量镜像到 Google Drive。运行时意外断开时，
 最多损失 1,000 个训练 step（步）；每 5,000 步额外保留一个编号归档。
@@ -155,3 +159,47 @@ checkpoint 选择规则预先固定为：使用离线验证损失最低的 `best
 （JavaScript Object Notation，JavaScript 对象表示法）、全部 20 个开发场景视频、
 成功率、覆盖率、回报、参数量、推理耗时和峰值显存。阶段 3 的脚本会拒绝最终测试
 场景；50 个最终测试场景要到阶段 5 才能使用。
+
+## 8. future_aware 的可选图片缓存
+
+`future_aware` 每个窗口读取 2 张历史图片和最多 4 张未来图片。对于处理器紧张的
+运行环境，可以把原读取路径产生的归一化图片一次性保存到本地内存映射文件，
+让训练和验证直接取用完全相同的张量。缓存约占用 2.64 GiB（Gibibyte，吉比字节）
+本地磁盘，不复制到 Drive；不同 worker 共享文件对应的内存页。
+
+在 Colab 终端中构建，已有同名缓存时脚本会拒绝覆盖：
+
+```bash
+cd /content/mini-wam
+python scripts/build_image_cache.py \
+  --config configs/future_aware_seed0.yaml \
+  --output /content/mini-wam-work/pusht-normalized-cache
+```
+
+读取器会核对源数据、归一化实现、依赖版本、帧数、形状和缓存校验值。只有设置
+`MINI_WAM_IMAGE_CACHE` 才启用缓存；不设置时保留原读取路径。缓存不会改变训练
+配置、动作、掩码、时间对齐、模型、优化器、学习率或采样器。
+
+在正式训练已暂停、有效检查点已备份后，运行分阶段测速与恢复验证。该脚本会
+做有限的参数更新作为诊断，但不会改写传入检查点或正式训练产物：
+
+```bash
+python scripts/profile_future_aware.py \
+  --checkpoint /content/mini-wam-work/perf-transition/resume.pt \
+  --cache /content/mini-wam-work/pusht-normalized-cache \
+  --output /content/mini-wam-work/perf-transition/profile.json
+```
+
+必须看到 `TENSORS_EXACT`、三个 `RESUME_EXACT` 和 `PROFILE_VERIFIED`，再按
+输出中的 `selected_workers` 选择加载进程数。诊断进程会开启 cuDNN（CUDA Deep Neural Network library）的确定性卷积，隔离非确定性运算对逐位恢复对照的影响；正式训练沿用原有运算设置。结果记录数据准备、主机到显卡传输、
+计算和端到端耗时；不要在另一个训练同时占用显卡时解读其绝对吞吐。
+
+后续从有效 `last.pt` 续跑时，在原有命令前设置环境变量，例如：
+
+```bash
+export MINI_WAM_IMAGE_CACHE=/content/mini-wam-work/pusht-normalized-cache
+```
+
+然后使用 `scripts/train_future_aware.py --resume ...` 及原训练配置、运行目录和
+Drive 镜像目录。运行时重建后须先重新构建本地缓存；若不启用缓存，同一检查点
+仍可通过原始数据路径恢复。训练环境记录中会保存启用的缓存路径和清单校验值。

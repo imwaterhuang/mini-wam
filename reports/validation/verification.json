@@ -1,0 +1,24 @@
+{
+  "verified_at_utc": "2026-09-10T15:56:50.052439+00:00",
+  "ordinary_tests": {
+    "passed": 57,
+    "skipped": 4
+  },
+  "separate_shared_memory_tests": {
+    "passed": 4,
+    "deselected": 7
+  },
+  "unique_tests_verified": 61,
+  "original_evidence_files_verified": 14,
+  "supplemental_evidence_files_verified": 22,
+  "decoded_videos": 6,
+  "all_video_frames_match_episode_steps_plus_one": true,
+  "paired_scene_count": 20,
+  "mcnemar_exact_two_sided_p": 0.375,
+  "model_source_modified": false,
+  "sealed_final_test_executed": false,
+  "formal_checkpoint_full_replay_performed_this_delivery": false,
+  "cross_machine_training_reproduction_performed": false,
+  "plotting_matplotlib_version": "3.11.1",
+  "runtime_notes": "Plotting dependencies installed into a temporary environment; training environment retained."
+}

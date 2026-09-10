@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "checkpoint_step": 34000,
+  "split": "offline_validation",
+  "windows_evaluated": 2368,
+  "valid_future_steps": 9352,
+  "conditions": {
+    "correct": "matched history and ground-truth action prefix",
+    "shuffled": "cyclically shifted action prefix with no self-pair in each full batch",
+    "reversed": "absolute action displacement reflected around current agent position, then clipped"
+  },
+  "mean_masked_cosine_loss": {
+    "correct": 0.03147451069175725,
+    "shuffled": 0.032593510943401995,
+    "reversed": 0.04411120232675859
+  },
+  "deltas_vs_correct": {
+    "shuffled": 0.0011190002516447417,
+    "reversed": 0.012636691635001335
+  },
+  "elapsed_seconds": 292.0032857749993,
+  "sealed_final_test_used": false
+}

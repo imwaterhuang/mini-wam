@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import importlib.util
 import time
 from collections import deque
 from dataclasses import asdict, dataclass
@@ -288,7 +289,14 @@ def run_rollout(
             if stopped:
                 break
 
-        iio.imwrite(output, np.stack(frames), fps=10, codec="libx264", out_pixel_format="yuv420p")
+        # PyAV is present in the local lock; Colab may only have imageio-ffmpeg.
+        # Their pixel-format keyword names differ. Choose the backend explicitly.
+        if importlib.util.find_spec("av") is not None:
+            iio.imwrite(output, np.stack(frames), plugin="pyav", fps=10,
+                        codec="libx264", out_pixel_format="yuv420p")
+        else:
+            iio.imwrite(output, np.stack(frames), plugin="FFMPEG", fps=10,
+                        codec="libx264", pixelformat="yuv420p")
         final = RolloutMetrics(
             success,
             final_coverage,

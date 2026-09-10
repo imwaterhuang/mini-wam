@@ -101,6 +101,15 @@ def train_future_aware(
         "validation_num_workers": 0,
         "prefetch_factor": 2 if num_workers > 0 else None,
         "persistent_workers": num_workers > 0,
+        "normalized_image_cache": (
+            {
+                "path": str(data.train_loader.dataset._image_cache.path),
+                "manifest_sha256": sha256_file(
+                    data.train_loader.dataset._image_cache.path / "manifest.json"
+                ),
+            }
+            if data.train_loader.dataset._image_cache is not None else None
+        ),
     }
     split_hash = sha256_file(data.split_path)
     dataset_fingerprint = validate_dataset(

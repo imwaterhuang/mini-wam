@@ -1,0 +1,236 @@
+{
+  "source": "Push-T web workbench seed_scene using mini_wam.studio.pusht.random_scene",
+  "requested_seed_range": [
+    2026091000,
+    2026091021
+  ],
+  "rejected_invalid_seeds": [
+    2026091000,
+    2026091005
+  ],
+  "selection_policy": "first 20 valid scenes in ascending seed order; fixed before either model ran",
+  "max_steps": 300,
+  "execute_steps": 4,
+  "scenes": [
+    {
+      "scene_id": "web-random-00",
+      "seed": 2026091001,
+      "state": {
+        "agent_x": 216.0,
+        "agent_y": 244.0,
+        "block_x": 130.0,
+        "block_y": 357.0,
+        "block_angle": -0.1846059597877825
+      }
+    },
+    {
+      "scene_id": "web-random-01",
+      "seed": 2026091002,
+      "state": {
+        "agent_x": 410.0,
+        "agent_y": 191.0,
+        "block_x": 235.0,
+        "block_y": 257.0,
+        "block_angle": -1.9098974128918376
+      }
+    },
+    {
+      "scene_id": "web-random-02",
+      "seed": 2026091003,
+      "state": {
+        "agent_x": 237.0,
+        "agent_y": 322.0,
+        "block_x": 120.0,
+        "block_y": 384.0,
+        "block_angle": -0.42937511416080554
+      }
+    },
+    {
+      "scene_id": "web-random-03",
+      "seed": 2026091004,
+      "state": {
+        "agent_x": 324.0,
+        "agent_y": 73.0,
+        "block_x": 301.0,
+        "block_y": 244.0,
+        "block_angle": 1.7518810787485544
+      }
+    },
+    {
+      "scene_id": "web-random-04",
+      "seed": 2026091006,
+      "state": {
+        "agent_x": 326.0,
+        "agent_y": 93.0,
+        "block_x": 271.0,
+        "block_y": 293.0,
+        "block_angle": -0.11572679615560766
+      }
+    },
+    {
+      "scene_id": "web-random-05",
+      "seed": 2026091007,
+      "state": {
+        "agent_x": 84.0,
+        "agent_y": 95.0,
+        "block_x": 168.0,
+        "block_y": 104.0,
+        "block_angle": 2.573554130784852
+      }
+    },
+    {
+      "scene_id": "web-random-06",
+      "seed": 2026091008,
+      "state": {
+        "agent_x": 321.0,
+        "agent_y": 191.0,
+        "block_x": 136.0,
+        "block_y": 277.0,
+        "block_angle": 1.803938102028261
+      }
+    },
+    {
+      "scene_id": "web-random-07",
+      "seed": 2026091009,
+      "state": {
+        "agent_x": 87.0,
+        "agent_y": 259.0,
+        "block_x": 182.0,
+        "block_y": 242.0,
+        "block_angle": 0.31348475688565536
+      }
+    },
+    {
+      "scene_id": "web-random-08",
+      "seed": 2026091010,
+      "state": {
+        "agent_x": 392.0,
+        "agent_y": 98.0,
+        "block_x": 165.0,
+        "block_y": 395.0,
+        "block_angle": -1.617941016113642
+      }
+    },
+    {
+      "scene_id": "web-random-09",
+      "seed": 2026091011,
+      "state": {
+        "agent_x": 404.0,
+        "agent_y": 207.0,
+        "block_x": 237.0,
+        "block_y": 378.0,
+        "block_angle": 0.8926938286946857
+      }
+    },
+    {
+      "scene_id": "web-random-10",
+      "seed": 2026091012,
+      "state": {
+        "agent_x": 336.0,
+        "agent_y": 202.0,
+        "block_x": 210.0,
+        "block_y": 125.0,
+        "block_angle": -2.3650961509214423
+      }
+    },
+    {
+      "scene_id": "web-random-11",
+      "seed": 2026091013,
+      "state": {
+        "agent_x": 312.0,
+        "agent_y": 78.0,
+        "block_x": 353.0,
+        "block_y": 322.0,
+        "block_angle": 3.0281775215352766
+      }
+    },
+    {
+      "scene_id": "web-random-12",
+      "seed": 2026091014,
+      "state": {
+        "agent_x": 323.0,
+        "agent_y": 418.0,
+        "block_x": 301.0,
+        "block_y": 226.0,
+        "block_angle": -2.3049119872785298
+      }
+    },
+    {
+      "scene_id": "web-random-13",
+      "seed": 2026091015,
+      "state": {
+        "agent_x": 278.0,
+        "agent_y": 176.0,
+        "block_x": 137.0,
+        "block_y": 213.0,
+        "block_angle": -0.4871055445354595
+      }
+    },
+    {
+      "scene_id": "web-random-14",
+      "seed": 2026091016,
+      "state": {
+        "agent_x": 96.0,
+        "agent_y": 392.0,
+        "block_x": 388.0,
+        "block_y": 209.0,
+        "block_angle": -2.0791567324876947
+      }
+    },
+    {
+      "scene_id": "web-random-15",
+      "seed": 2026091017,
+      "state": {
+        "agent_x": 338.0,
+        "agent_y": 341.0,
+        "block_x": 141.0,
+        "block_y": 134.0,
+        "block_angle": -1.2159777001828513
+      }
+    },
+    {
+      "scene_id": "web-random-16",
+      "seed": 2026091018,
+      "state": {
+        "agent_x": 199.0,
+        "agent_y": 348.0,
+        "block_x": 270.0,
+        "block_y": 103.0,
+        "block_angle": -0.6197747185887632
+      }
+    },
+    {
+      "scene_id": "web-random-17",
+      "seed": 2026091019,
+      "state": {
+        "agent_x": 85.0,
+        "agent_y": 154.0,
+        "block_x": 165.0,
+        "block_y": 354.0,
+        "block_angle": -0.8432213756661917
+      }
+    },
+    {
+      "scene_id": "web-random-18",
+      "seed": 2026091020,
+      "state": {
+        "agent_x": 190.0,
+        "agent_y": 274.0,
+        "block_x": 129.0,
+        "block_y": 135.0,
+        "block_angle": 2.756354024473622
+      }
+    },
+    {
+      "scene_id": "web-random-19",
+      "seed": 2026091021,
+      "state": {
+        "agent_x": 307.0,
+        "agent_y": 129.0,
+        "block_x": 145.0,
+        "block_y": 196.0,
+        "block_angle": -0.6596678086961685
+      }
+    }
+  ]
+}

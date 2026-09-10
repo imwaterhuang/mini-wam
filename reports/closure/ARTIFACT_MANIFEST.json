@@ -1,0 +1,76 @@
+{
+  "root": "/content/drive/MyDrive/mini-wam-runs/project-closure-20260910",
+  "file_count": 14,
+  "files": [
+    {
+      "path": "FINAL_REPORT.json",
+      "bytes": 4371,
+      "sha256": "d862dc34af9e02332b4d3e1ae0d245e6e05e96d8a69ea695f1f2e6b64868b2e2"
+    },
+    {
+      "path": "PROJECT_CONCLUSION.md",
+      "bytes": 2722,
+      "sha256": "b6be8dd5367e206017b7ff63cbe65640704a5874ff275bc40feb90fe8f92fa46"
+    },
+    {
+      "path": "figures/counterfactual_losses.png",
+      "bytes": 41610,
+      "sha256": "cdaddc86c3c166cffeac90a6c36e95b8a1065e73821e7ba30f3009fa933fb621"
+    },
+    {
+      "path": "figures/future_aware_loss_curves.png",
+      "bytes": 161493,
+      "sha256": "fd5e2bbc724f7f0de5dc7fc4e13250f8c78ce812ee2102bc09cb43e5811569a5"
+    },
+    {
+      "path": "figures/paired_comparison.png",
+      "bytes": 56832,
+      "sha256": "dd13343813584ac93c250e60ec4056f6b5c95da0e75d52d4425c7320d00fc804"
+    },
+    {
+      "path": "paired_comparison.csv",
+      "bytes": 2182,
+      "sha256": "9b4b06a063cbc62b96051b00f7a018ce53f26a8e9f9657a2c24e64a6087023f8"
+    },
+    {
+      "path": "representative_videos/action_only_only_success__action_only__web-random-09.mp4",
+      "bytes": 51337,
+      "sha256": "f41e857de4fa06d407dabd05eef5b0dee3e3b8cf28400819cde0b9bc0d280047"
+    },
+    {
+      "path": "representative_videos/action_only_only_success__future_aware__web-random-09.mp4",
+      "bytes": 94760,
+      "sha256": "00c02f53fed1eca15bce95ce3dec856ab53f2407375ce0e4051aaf8d17266681"
+    },
+    {
+      "path": "representative_videos/future_aware_only_success__action_only__web-random-00.mp4",
+      "bytes": 80384,
+      "sha256": "240a8bcbed0ba9bc95cb34b15ceebb2bc143fa9dc0eab378a9a1c93e2e7fba26"
+    },
+    {
+      "path": "representative_videos/future_aware_only_success__future_aware__web-random-00.mp4",
+      "bytes": 51953,
+      "sha256": "2f7927171a777b7d8cf46f6b2302c9698ac0c1887092e99048e2b5f5d75b6828"
+    },
+    {
+      "path": "representative_videos/shared_success__action_only__web-random-04.mp4",
+      "bytes": 43897,
+      "sha256": "78e072249da408ccafb11ab304eeebe81c7c0efe0fb5e267746750c1f7d4a328"
+    },
+    {
+      "path": "representative_videos/shared_success__future_aware__web-random-04.mp4",
+      "bytes": 45185,
+      "sha256": "c513799559dd1d6c5f20a771fdbdcdb280bdf85f220c617441943e7de1f25197"
+    },
+    {
+      "path": "results.json",
+      "bytes": 20347,
+      "sha256": "742124765177f3be533f99605ab62d44b1df8bb8bc28e63cb28cbaa8b8c02510"
+    },
+    {
+      "path": "scenes.json",
+      "bytes": 5286,
+      "sha256": "6685c61287d96d96bd9c1980cf36adef971e2ed46031cedf555d89698500568c"
+    }
+  ]
+}

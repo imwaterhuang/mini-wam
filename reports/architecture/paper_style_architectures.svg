@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1340" viewBox="0 0 1680 1340"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/></marker></defs><rect width="1680" height="1680" fill="white"/><style>text{font-family:Arial,Helvetica,sans-serif;fill:#222} .title{font-size:30px;font-weight:600}.subtitle{font-size:17px;fill:#666}</style>
+<text x="840" y="48" text-anchor="middle" font-size="34" font-weight="600" style="fill:#222">Mini-WAM | Policy Architectures</text>
+<text x="840" y="79" text-anchor="middle" font-size="18" font-weight="normal" style="fill:#666">Bottom-to-top data flow · tensor shapes shown per batch · training objectives at the top</text>
+<rect x="30" y="104" width="530" height="1060" rx="15" fill="#fcfcfc" stroke="#c2c2c2" stroke-width="1.4"/>
+<text x="295.0" y="145" text-anchor="middle" font-size="28" font-weight="600" style="fill:#222">(a) Action-only</text>
+<text x="295.0" y="175" text-anchor="middle" font-size="17" font-weight="normal" style="fill:#666">Implemented architecture</text>
+<rect x="585" y="104" width="1065" height="1060" rx="15" fill="#fcfcfc" stroke="#c2c2c2" stroke-width="1.4"/>
+<text x="1117.5" y="145" text-anchor="middle" font-size="28" font-weight="600" style="fill:#222">(b) Future-aware</text>
+<text x="1117.5" y="175" text-anchor="middle" font-size="17" font-weight="normal" style="fill:#666">Implemented architecture · auxiliary branch used only during training</text>
+<rect x="70" y="1040" width="215" height="76" rx="8" fill="#e7f1d7" stroke="#444" stroke-width="1.7"/>
+<text x="177.5" y="1072.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Image history</text>
+<text x="177.5" y="1097.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 2, 3, 96, 96]</text>
+<rect x="310" y="1040" width="180" height="76" rx="8" fill="#e7f1d7" stroke="#444" stroke-width="1.7"/>
+<text x="400.0" y="1072.5" text-anchor="middle" font-size="18.867924528301884" font-weight="normal" style="fill:#222">Position history</text>
+<text x="400.0" y="1097.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 2, 2]</text>
+<rect x="70" y="890" width="215" height="114" rx="8" fill="#f6d2a3" stroke="#444" stroke-width="1.7"/>
+<text x="177.5" y="929.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Visual Encoder</text>
+<text x="177.5" y="954.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">ResNet-18</text>
+<text x="177.5" y="979.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 2, 512]</text>
+<rect x="310" y="890" width="180" height="114" rx="8" fill="#f6d2a3" stroke="#444" stroke-width="1.7"/>
+<text x="400.0" y="929.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">State Encoder</text>
+<text x="400.0" y="954.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">4 → 64 → 64</text>
+<text x="400.0" y="979.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 64]</text>
+<polyline points="177,1040 177,1004" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="400,1040 400,1004" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="132" y="766" width="300" height="76" rx="8" fill="#d8eaca" stroke="#444" stroke-width="1.7"/>
+<text x="282.0" y="798.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Flatten + Concatenate</text>
+<text x="282.0" y="823.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 1024 + 64]</text>
+<polyline points="177,890 177,866 230,866 230,842" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="400,890 400,866 342,866 342,842" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="132" y="634" width="300" height="93" rx="8" fill="#c5deeb" stroke="#444" stroke-width="1.7"/>
+<text x="282.0" y="662.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">History Fusion</text>
+<text x="282.0" y="687.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">1088 → 512 → 256</text>
+<text x="282.0" y="712.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">h(t): [B, 256]</text>
+<polyline points="282,766 282,727" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="132" y="482" width="300" height="102" rx="8" fill="#c5deeb" stroke="#444" stroke-width="1.7"/>
+<text x="282.0" y="515.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Action Head</text>
+<text x="282.0" y="540.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">256 → 256 → 32</text>
+<text x="282.0" y="565.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Reshape to [B, 16, 2]</text>
+<polyline points="282,634 282,584" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="132" y="362" width="300" height="76" rx="8" fill="#e7f1d7" stroke="#444" stroke-width="1.7"/>
+<text x="282.0" y="394.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Predicted Action Chunk</text>
+<text x="282.0" y="419.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">â(t), …, â(t+15)</text>
+<polyline points="282,482 282,438" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="132" y="224" width="300" height="88" rx="8" fill="#e4d9ee" stroke="#444" stroke-width="1.7"/>
+<text x="282.0" y="262.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Masked Smooth L1</text>
+<text x="282.0" y="287.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">L_action</text>
+<polyline points="282,362 282,312" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="375" y="346" text-anchor="middle" font-size="13" font-weight="normal" style="fill:#6b526e">+ targets / mask</text>
+<rect x="620" y="1040" width="215" height="76" rx="8" fill="#e7f1d7" stroke="#444" stroke-width="1.7"/>
+<text x="727.5" y="1072.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Image history</text>
+<text x="727.5" y="1097.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 2, 3, 96, 96]</text>
+<rect x="860" y="1040" width="180" height="76" rx="8" fill="#e7f1d7" stroke="#444" stroke-width="1.7"/>
+<text x="950.0" y="1072.5" text-anchor="middle" font-size="18.867924528301884" font-weight="normal" style="fill:#222">Position history</text>
+<text x="950.0" y="1097.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 2, 2]</text>
+<rect x="620" y="890" width="215" height="114" rx="8" fill="#f6d2a3" stroke="#444" stroke-width="1.7"/>
+<text x="727.5" y="929.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Visual Encoder</text>
+<text x="727.5" y="954.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">ResNet-18</text>
+<text x="727.5" y="979.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 2, 512]</text>
+<rect x="860" y="890" width="180" height="114" rx="8" fill="#f6d2a3" stroke="#444" stroke-width="1.7"/>
+<text x="950.0" y="929.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">State Encoder</text>
+<text x="950.0" y="954.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">4 → 64 → 64</text>
+<text x="950.0" y="979.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 64]</text>
+<polyline points="727,1040 727,1004" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="950,1040 950,1004" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="682" y="766" width="300" height="76" rx="8" fill="#d8eaca" stroke="#444" stroke-width="1.7"/>
+<text x="832.0" y="798.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Flatten + Concatenate</text>
+<text x="832.0" y="823.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 1024 + 64]</text>
+<polyline points="727,890 727,866 780,866 780,842" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="950,890 950,866 892,866 892,842" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="682" y="634" width="300" height="93" rx="8" fill="#c5deeb" stroke="#444" stroke-width="1.7"/>
+<text x="832.0" y="662.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">History Fusion</text>
+<text x="832.0" y="687.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">1088 → 512 → 256</text>
+<text x="832.0" y="712.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">h(t): [B, 256]</text>
+<polyline points="832,766 832,727" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="682" y="482" width="300" height="102" rx="8" fill="#c5deeb" stroke="#444" stroke-width="1.7"/>
+<text x="832.0" y="515.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Action Head</text>
+<text x="832.0" y="540.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">256 → 256 → 32</text>
+<text x="832.0" y="565.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Reshape to [B, 16, 2]</text>
+<polyline points="832,634 832,584" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="682" y="362" width="300" height="76" rx="8" fill="#e7f1d7" stroke="#444" stroke-width="1.7"/>
+<text x="832.0" y="394.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Predicted Action Chunk</text>
+<text x="832.0" y="419.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">â(t), …, â(t+15)</text>
+<polyline points="832,482 832,438" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="682" y="224" width="300" height="88" rx="8" fill="#e4d9ee" stroke="#444" stroke-width="1.7"/>
+<text x="832.0" y="262.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Masked Smooth L1</text>
+<text x="832.0" y="287.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">L_action</text>
+<polyline points="832,362 832,312" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="925" y="346" text-anchor="middle" font-size="13" font-weight="normal" style="fill:#6b526e">+ targets / mask</text>
+<text x="295" y="1144" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">L_total = L_action</text>
+<rect x="1082" y="340" width="548" height="802" rx="12" fill="#fffaf0" stroke="#b7a585" stroke-dasharray="8 5"/>
+<text x="1356" y="373" text-anchor="middle" font-size="20" font-weight="600" style="fill:#222">Training-only future supervision</text>
+<rect x="1100" y="1036" width="235" height="78" rx="8" fill="#e7f1d7" stroke="#444" stroke-width="1.7"/>
+<text x="1217.5" y="1057.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">True Action Prefix</text>
+<text x="1217.5" y="1082.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">a(t), …, a(t+3)</text>
+<text x="1217.5" y="1107.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 4, 2]</text>
+<rect x="1100" y="863" width="235" height="130" rx="8" fill="#f6d2a3" stroke="#444" stroke-width="1.7"/>
+<text x="1217.5" y="897.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Action Prefix Encoder</text>
+<text x="1217.5" y="922.5" text-anchor="middle" font-size="15.024458420684836" font-weight="normal" style="fill:#222">Per-step MLP: 2 → 64 → 64</text>
+<text x="1217.5" y="947.5" text-anchor="middle" font-size="16.22641509433962" font-weight="normal" style="fill:#222">+ fixed sin/cos encoding</text>
+<text x="1217.5" y="972.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Flatten → [B, 256]</text>
+<polyline points="1217,1036 1217,993" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1100" y="753" width="235" height="68" rx="8" fill="#d8eaca" stroke="#444" stroke-width="1.7"/>
+<text x="1217.5" y="781.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Concatenate</text>
+<text x="1217.5" y="806.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 256 + 256]</text>
+<polyline points="1217,863 1217,821" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="982,680 1060,680 1060,787 1100,787" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1057" y="661" text-anchor="middle" font-size="16" font-weight="normal" style="fill:#222">h(t)</text>
+<rect x="1100" y="571" width="235" height="133" rx="8" fill="#c5deeb" stroke="#444" stroke-width="1.7"/>
+<text x="1217.5" y="607.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Future Head</text>
+<text x="1217.5" y="632.0" text-anchor="middle" font-size="15" font-weight="normal" style="fill:#222">512 → 1024 → 2048; ReLU × 2</text>
+<text x="1217.5" y="657.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">L2 normalization</text>
+<text x="1217.5" y="682.0" text-anchor="middle" font-size="16.22641509433962" font-weight="normal" style="fill:#222">Predicted ẑ: [B, 4, 512]</text>
+<polyline points="1217,753 1217,704" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1370" y="1036" width="240" height="78" rx="8" fill="#e7f1d7" stroke="#444" stroke-width="1.7"/>
+<text x="1490.0" y="1057.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">True Future Images</text>
+<text x="1490.0" y="1082.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">o(t+1), …, o(t+4)</text>
+<text x="1490.0" y="1107.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">[B, 4, 3, 96, 96]</text>
+<rect x="1370" y="805" width="240" height="165" rx="8" fill="#e5e5e5" stroke="#444" stroke-width="1.7"/>
+<text x="1490.0" y="844.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Frozen Target Encoder</text>
+<text x="1490.0" y="869.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Independent ResNet-18</text>
+<text x="1490.0" y="894.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">L2 normalization</text>
+<text x="1490.0" y="919.5" text-anchor="middle" font-size="18.047579983593106" font-weight="normal" style="fill:#222">No gradient · eval mode</text>
+<text x="1490.0" y="944.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Target z: [B, 4, 512]</text>
+<polyline points="1490,1036 1490,970" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1190" y="411" width="340" height="102" rx="8" fill="#e4d9ee" stroke="#444" stroke-width="1.7"/>
+<text x="1360.0" y="444.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Masked Cosine Distance</text>
+<text x="1360.0" y="469.0" text-anchor="middle" font-size="16.31820499745028" font-weight="normal" style="fill:#222">L_future = mean_valid(1 − cos(ẑ, z))</text>
+<text x="1360.0" y="494.0" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">future_valid_mask: [B, 4]</text>
+<polyline points="1217,571 1217,513" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1490,805 1490,513" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="1490" y="650" text-anchor="middle" font-size="17" font-weight="normal" style="fill:#666">stop gradient</text>
+<rect x="1110" y="224" width="490" height="88" rx="8" fill="#e4d9ee" stroke="#444" stroke-width="1.7"/>
+<text x="1355.0" y="262.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Total Training Objective</text>
+<text x="1355.0" y="287.5" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">L_action + 0.1 × L_future</text>
+<polyline points="982,268 1110,268" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1360,411 1360,312" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="840" y="1200" text-anchor="middle" font-size="20" font-weight="600" style="fill:#222">Inference: both models use only the policy tower to predict 16 actions; execute the first 4, then observe again.</text>
+<text x="840" y="1232" text-anchor="middle" font-size="19" font-weight="normal" style="fill:#222">Future loss updates the shared history representation through the future head. The target encoder stays frozen.</text>
+<text x="840" y="1271" text-anchor="middle" font-size="17" font-weight="normal" style="fill:#666">MLP = Multilayer Perceptron · ResNet = Residual Network · ReLU = Rectified Linear Unit · B = batch size</text>
+<text x="840" y="1302" text-anchor="middle" font-size="16" font-weight="normal" style="fill:#666">Source: action_only.py + future_head.py   |   Same policy structure and initialization; separately trained weights.</text>
+</svg>

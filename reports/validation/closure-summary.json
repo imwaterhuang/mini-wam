@@ -1,0 +1,242 @@
+{
+  "original_files_verified": 14,
+  "supplementary_files_verified": 22,
+  "summary": {
+    "action_only": {
+      "episode_count": 20,
+      "success_count": 2,
+      "success_rate": 0.1,
+      "mean_final_coverage": 0.5555529766977845,
+      "median_final_coverage": 0.8099302812357906,
+      "final_coverage_std": 0.39919625931648534,
+      "success_rate_wilson_95": [
+        0.027866481213768224,
+        0.3010336452284873
+      ]
+    },
+    "future_aware": {
+      "episode_count": 20,
+      "success_count": 5,
+      "success_rate": 0.25,
+      "mean_final_coverage": 0.47799653851982477,
+      "median_final_coverage": 0.3373392779618698,
+      "final_coverage_std": 0.42799029575775255,
+      "success_rate_wilson_95": [
+        0.11186170140766569,
+        0.468700877618744
+      ]
+    }
+  },
+  "paired_outcomes": {
+    "both_success": 1,
+    "action_only_only": 1,
+    "future_aware_only": 4,
+    "neither_success": 14
+  },
+  "mcnemar_exact_two_sided_p": 0.375,
+  "success_rate_difference_future_minus_action": 0.15,
+  "std_convention": "population, ddof=0, dispersion over these scenes",
+  "interval_scope": "scene uncertainty conditional on one trained model; not training-seed uncertainty",
+  "paired_rows": [
+    {
+      "scene_id": "web-random-00",
+      "seed": 2026091001,
+      "action_only_is_success": false,
+      "future_aware_is_success": true,
+      "action_only_final_coverage": 0.2484634833789596,
+      "future_aware_final_coverage": 0.9512377638133703,
+      "action_only_max_coverage": 0.2484634833789596,
+      "future_aware_max_coverage": 0.9512377638133703
+    },
+    {
+      "scene_id": "web-random-01",
+      "seed": 2026091002,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.890882090820594,
+      "future_aware_final_coverage": 0.37374301792119885,
+      "action_only_max_coverage": 0.890882090820594,
+      "future_aware_max_coverage": 0.37374301792119885
+    },
+    {
+      "scene_id": "web-random-02",
+      "seed": 2026091003,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.0,
+      "future_aware_final_coverage": 0.0,
+      "action_only_max_coverage": 0.0,
+      "future_aware_max_coverage": 0.0
+    },
+    {
+      "scene_id": "web-random-03",
+      "seed": 2026091004,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.8955960329376794,
+      "future_aware_final_coverage": 0.0,
+      "action_only_max_coverage": 0.8955960329376794,
+      "future_aware_max_coverage": 0.5072417982833825
+    },
+    {
+      "scene_id": "web-random-04",
+      "seed": 2026091006,
+      "action_only_is_success": true,
+      "future_aware_is_success": true,
+      "action_only_final_coverage": 0.950102149625831,
+      "future_aware_final_coverage": 0.961505815115511,
+      "action_only_max_coverage": 0.950102149625831,
+      "future_aware_max_coverage": 0.961505815115511
+    },
+    {
+      "scene_id": "web-random-05",
+      "seed": 2026091007,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.0,
+      "future_aware_final_coverage": 0.0,
+      "action_only_max_coverage": 7.55887610873695e-05,
+      "future_aware_max_coverage": 0.03770731319123769
+    },
+    {
+      "scene_id": "web-random-06",
+      "seed": 2026091008,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.1207094548775214,
+      "future_aware_final_coverage": 0.30093553800254075,
+      "action_only_max_coverage": 0.1207094548775214,
+      "future_aware_max_coverage": 0.30093553800254075
+    },
+    {
+      "scene_id": "web-random-07",
+      "seed": 2026091009,
+      "action_only_is_success": false,
+      "future_aware_is_success": true,
+      "action_only_final_coverage": 0.808358083058641,
+      "future_aware_final_coverage": 0.9613855130694311,
+      "action_only_max_coverage": 0.808358083058641,
+      "future_aware_max_coverage": 0.9613855130694311
+    },
+    {
+      "scene_id": "web-random-08",
+      "seed": 2026091010,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.0,
+      "future_aware_final_coverage": 0.0,
+      "action_only_max_coverage": 0.0,
+      "future_aware_max_coverage": 0.0
+    },
+    {
+      "scene_id": "web-random-09",
+      "seed": 2026091011,
+      "action_only_is_success": true,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.9505861459854146,
+      "future_aware_final_coverage": 0.8305921314005074,
+      "action_only_max_coverage": 0.9505861459854146,
+      "future_aware_max_coverage": 0.9316858675529441
+    },
+    {
+      "scene_id": "web-random-10",
+      "seed": 2026091012,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.9081846742864259,
+      "future_aware_final_coverage": 0.0,
+      "action_only_max_coverage": 0.925995069758597,
+      "future_aware_max_coverage": 0.06982895855581561
+    },
+    {
+      "scene_id": "web-random-11",
+      "seed": 2026091013,
+      "action_only_is_success": false,
+      "future_aware_is_success": true,
+      "action_only_final_coverage": 0.8115024794129402,
+      "future_aware_final_coverage": 0.9515739923710366,
+      "action_only_max_coverage": 0.894018387837402,
+      "future_aware_max_coverage": 0.9515739923710366
+    },
+    {
+      "scene_id": "web-random-12",
+      "seed": 2026091014,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.8664243325758164,
+      "future_aware_final_coverage": 0.9363601485598015,
+      "action_only_max_coverage": 0.8664243325758164,
+      "future_aware_max_coverage": 0.9363601485598015
+    },
+    {
+      "scene_id": "web-random-13",
+      "seed": 2026091015,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.8186602662367215,
+      "future_aware_final_coverage": 0.2292833229555461,
+      "action_only_max_coverage": 0.8186602662367215,
+      "future_aware_max_coverage": 0.2292833229555461
+    },
+    {
+      "scene_id": "web-random-14",
+      "seed": 2026091016,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.0,
+      "future_aware_final_coverage": 0.9485745271661857,
+      "action_only_max_coverage": 0.0,
+      "future_aware_max_coverage": 0.9485745271661857
+    },
+    {
+      "scene_id": "web-random-15",
+      "seed": 2026091017,
+      "action_only_is_success": false,
+      "future_aware_is_success": true,
+      "action_only_final_coverage": 0.24619808512519856,
+      "future_aware_final_coverage": 0.971306183053712,
+      "action_only_max_coverage": 0.4235946554868363,
+      "future_aware_max_coverage": 0.971306183053712
+    },
+    {
+      "scene_id": "web-random-16",
+      "seed": 2026091018,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.0,
+      "future_aware_final_coverage": 0.0,
+      "action_only_max_coverage": 0.0,
+      "future_aware_max_coverage": 0.02223283058710134
+    },
+    {
+      "scene_id": "web-random-17",
+      "seed": 2026091019,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.8904865435969712,
+      "future_aware_final_coverage": 0.9182889845275821,
+      "action_only_max_coverage": 0.8904865435969712,
+      "future_aware_max_coverage": 0.9182889845275821
+    },
+    {
+      "scene_id": "web-random-18",
+      "seed": 2026091020,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.9445217841438881,
+      "future_aware_final_coverage": 0.03280214845251335,
+      "action_only_max_coverage": 0.9447344857292601,
+      "future_aware_max_coverage": 0.03280214845251335
+    },
+    {
+      "scene_id": "web-random-19",
+      "seed": 2026091021,
+      "action_only_is_success": false,
+      "future_aware_is_success": false,
+      "action_only_final_coverage": 0.7603839278930856,
+      "future_aware_final_coverage": 0.19234168398755863,
+      "action_only_max_coverage": 0.7603839278930856,
+      "future_aware_max_coverage": 0.47343500076552364
+    }
+  ]
+}

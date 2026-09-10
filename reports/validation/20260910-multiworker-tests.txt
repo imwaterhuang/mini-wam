@@ -1,0 +1,4 @@
+Command: MINI_WAM_RUN_MULTIWORKER_TESTS=1 ./.venv/bin/python -m pytest tests/test_training.py -q -k "worker_prefetch or multiworker_interrupted"
+Environment: local macOS process with shared-memory access
+Result: 4 passed, 7 deselected in 100.25s
+These are the four tests skipped by the default sandbox run.

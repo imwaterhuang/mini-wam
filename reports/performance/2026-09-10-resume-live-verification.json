@@ -1,0 +1,14 @@
+{
+  "source": "Colab terminal observed live",
+  "resumed_from_step": 2000,
+  "observed_steps": [
+    2038,
+    2083
+  ],
+  "observed_seconds": 15.01,
+  "seconds_per_step": 0.3337,
+  "trainer_pid": 28887,
+  "finite_losses": true,
+  "selected_workers": 4,
+  "controlled_benchmark_speedup": 2.0970847965347414
+}

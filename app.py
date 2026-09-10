@@ -322,7 +322,9 @@ def _metrics_text(metrics, status: str = "执行中") -> str:
     )
 
 
-def execute_task(scene_values: list[float], selected_model: str) -> Generator[tuple[np.ndarray, str, str | None], None, None]:
+def execute_task(
+    scene_values: list[float], selected_model: str, max_steps: int
+) -> Generator[tuple[np.ndarray, str, str | None], None, None]:
     with runtime.lock:
         if runtime.running:
             raise gr.Error("已有任务正在执行")
@@ -333,6 +335,9 @@ def execute_task(scene_values: list[float], selected_model: str) -> Generator[tu
     try:
         if not selected_model:
             raise gr.Error("请先选择模型")
+        max_steps = int(max_steps)
+        if not 1 <= max_steps <= 1_000:
+            raise gr.Error("网页试玩的最多环境步数必须在 1 到 1000 之间")
         scene = _scene(scene_values)
         validate_scene(scene)
         device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -352,6 +357,7 @@ def execute_task(scene_values: list[float], selected_model: str) -> Generator[tu
             scene,
             video_path,
             stop_event=runtime.stop_event,
+            max_steps=max_steps,
         ):
             last_update = update
             final_status = "任务未完成" if update.video_path else "执行中"
@@ -365,6 +371,7 @@ def execute_task(scene_values: list[float], selected_model: str) -> Generator[tu
                 "model": selected_model,
                 "dataset": dataset.to_dict(),
                 "scene": _scene_list(scene),
+                "max_steps": max_steps,
                 "metrics": last_update.metrics.to_dict(),
                 "video": str(video_path),
             }
@@ -416,6 +423,14 @@ def build_app() -> gr.Blocks:
                     with gr.Row():
                         seed = gr.Number(value=0, precision=0, label="seed（随机种子）")
                         random_button = gr.Button("生成随机场景")
+                    max_steps = gr.Slider(
+                        100,
+                        1000,
+                        value=300,
+                        step=50,
+                        label="最多环境步数（仅网页试玩）",
+                        info="300 与正式评测一致；增大后可观察模型是否会在更长时间内完成。",
+                    )
                     placement_target = gr.Radio(
                         ["智能体", "T 块"], value="智能体", label="点击画布时移动"
                     )
@@ -532,7 +547,7 @@ def build_app() -> gr.Blocks:
         )
         run_button.click(
             execute_task,
-            inputs=[scene_state, selected_model_state],
+            inputs=[scene_state, selected_model_state, max_steps],
             outputs=[canvas, rollout_metrics, rollout_video],
             concurrency_limit=1,
         )

@@ -1,0 +1,42 @@
+{
+  "status": "training_complete_with_metrics_replay_recorded",
+  "run_dir": "/content/drive/MyDrive/mini-wam-runs/future-aware-seed0-w4",
+  "completion_marker": "completed target step 50000",
+  "train_rows_original": 51000,
+  "train_unique_steps": 50000,
+  "duplicate_steps": [
+    25001,
+    26000
+  ],
+  "duplicate_step_count": 1000,
+  "missing_steps": 0,
+  "deduplication_policy": "keep later occurrence from resumed execution; originals preserved",
+  "validation_rows_original": 51,
+  "validation_unique_steps": 50,
+  "selected_checkpoint_policy": "minimum offline validation total loss",
+  "best_checkpoint": {
+    "file": "checkpoints/best.pt",
+    "step": 34000,
+    "validation_total_loss": 0.065017026126673,
+    "sha256": "5b3ba0bb141564fa664054a514585b849b7f178c0f2cedca7ee03b974dc1a79b"
+  },
+  "last_checkpoint": {
+    "file": "checkpoints/last.pt",
+    "step": 50000,
+    "validation_total_loss": 0.06536981626362348,
+    "sha256": "d7815757ecc79257e8ca3e3245499c71cf0464a49cb3040302b939f1ea47e51b"
+  },
+  "archive_checkpoint": {
+    "file": "checkpoints/step_0050000.pt",
+    "step": 50000,
+    "sha256": "d023c50faf5e2efdf0e0885874a989b97ee4edf463fd4593b0c038bdbc9f14e8"
+  },
+  "last_vs_archive": {
+    "model_tensors_exact": true,
+    "step_equal": true,
+    "config_equal": true,
+    "split_hash_equal": true,
+    "validation_loss_equal": true
+  },
+  "sealed_final_test_used": false
+}

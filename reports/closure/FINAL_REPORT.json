@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "status": "closed_as_single_seed_exploratory_study",
+  "closed_at_utc": "2026-09-10T14:16:57.556213+00:00",
+  "scope": {
+    "task": "Push-T",
+    "models": [
+      "action_only",
+      "future_aware"
+    ],
+    "training_seeds_per_model": 1,
+    "checkpoint_selection_rule": "minimum offline validation loss; frozen before this closure",
+    "sealed_final_test_used": false,
+    "additional_training_performed_during_closure": false
+  },
+  "primary_paired_development_result": {
+    "scene_count": 20,
+    "same_initial_states": true,
+    "action_only": {
+      "success_count": 2,
+      "success_rate": 0.1,
+      "mean_final_coverage": 0.5555529766977844,
+      "median_final_coverage": 0.8099302812357906,
+      "mean_max_coverage": 0.569453534928021,
+      "median_max_coverage": 0.8135091746476812,
+      "mean_reward": 102.01925184246178,
+      "mean_steps": 282.5,
+      "mean_inference_ms": 48.858642248000805
+    },
+    "future_aware": {
+      "success_count": 5,
+      "success_rate": 0.25,
+      "mean_final_coverage": 0.4779965385198247,
+      "median_final_coverage": 0.3373392779618698,
+      "mean_max_coverage": 0.5289564361972217,
+      "median_max_coverage": 0.490338399524453,
+      "mean_reward": 65.75107450833542,
+      "mean_steps": 259.2,
+      "mean_inference_ms": 49.580997314668515
+    },
+    "future_minus_action_success_rate": 0.15,
+    "paired_outcomes": {
+      "both_success": 1,
+      "action_only_only": 1,
+      "future_aware_only": 4,
+      "neither_success": 14
+    },
+    "mcnemar_exact_two_sided_p": 0.375,
+    "uncertainty_and_dispersion": {
+      "action_only_success_rate_wilson_95": [
+        0.027866481213768224,
+        0.3010336452284873
+      ],
+      "future_aware_success_rate_wilson_95": [
+        0.11186170140766569,
+        0.468700877618744
+      ],
+      "action_only_final_coverage_std": 0.39919625931648534,
+      "future_aware_final_coverage_std": 0.4279902957577526
+    }
+  },
+  "future_aware_additional_development_result": {
+    "success_count": 6,
+    "success_rate": 0.3,
+    "mean_final_coverage": 0.5540707593520556,
+    "median_final_coverage": 0.6492577024327766,
+    "mean_max_coverage": 0.6191476822639739,
+    "median_max_coverage": 0.6934965792540283,
+    "mean_reward": 77.3388241755408,
+    "mean_steps": 258.0,
+    "mean_inference_ms": 49.44686939997865
+  },
+  "future_branch_counterfactual": {
+    "windows_evaluated": 2368,
+    "valid_future_steps": 9352,
+    "mean_masked_cosine_loss": {
+      "correct": 0.03147451069175725,
+      "shuffled": 0.032593510943401995,
+      "reversed": 0.04411120232675859
+    },
+    "deltas_vs_correct": {
+      "shuffled": 0.0011190002516447417,
+      "reversed": 0.012636691635001335
+    },
+    "interpretation": "reversed actions increase loss clearly; shuffled-action delta is positive but weak"
+  },
+  "checkpoints": {
+    "action_only": {
+      "step": 10000,
+      "sha256": "3b739cf3897dde0806b2b93b9404a41cec95975ce26a3483e9c17226747a3506"
+    },
+    "future_aware": {
+      "step": 34000,
+      "sha256": "5b3ba0bb141564fa664054a514585b849b7f178c0f2cedca7ee03b974dc1a79b"
+    }
+  },
+  "unavailable_stability_metrics": {
+    "action_reversal_count": "not collected",
+    "action_change_magnitude": "not collected",
+    "coverage_regression_count": "not collected",
+    "reason": "step-level action and coverage trajectories were not persisted; videos are not used to fabricate quantitative values"
+  },
+  "claim_boundary": [
+    "single training seed per model",
+    "20-scene paired set is development evidence, not a sealed final test",
+    "success-rate difference is not statistically significant",
+    "the future-aware policy has lower median final coverage and slightly higher dispersion on the paired set",
+    "no claim of robust superiority or generalization beyond Push-T"
+  ],
+  "representative_videos": [
+    "representative_videos/shared_success__action_only__web-random-04.mp4",
+    "representative_videos/shared_success__future_aware__web-random-04.mp4",
+    "representative_videos/action_only_only_success__action_only__web-random-09.mp4",
+    "representative_videos/action_only_only_success__future_aware__web-random-09.mp4",
+    "representative_videos/future_aware_only_success__action_only__web-random-00.mp4",
+    "representative_videos/future_aware_only_success__future_aware__web-random-00.mp4"
+  ]
+}

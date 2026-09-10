@@ -83,6 +83,7 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
         action_horizon: int = 16,
         future_horizon: int = 4,
         include_future_observations: bool = True,
+        image_cache_path: str | Path | None = None,
     ) -> None:
         super().__init__()
         if action_horizon < 1 or future_horizon < 1:
@@ -113,6 +114,12 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
         self._windows = self._build_window_index(set(episode_ids))
         if not self._windows:
             raise ValueError("The selected episodes produced no valid training windows")
+        self._image_cache = None
+        if image_cache_path is not None:
+            from .image_cache import NormalizedImageCache
+            self._image_cache = NormalizedImageCache(
+                image_cache_path, self.dataset_root, len(self._states)
+            )
 
     def _load_scalar_tensors(self) -> tuple[Tensor, Tensor]:
         """Load small numeric columns once, avoiding unnecessary image decoding."""
@@ -171,9 +178,8 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
     def __getitem__(self, index: int) -> dict[str, Tensor]:
         episode_id, local_t, global_t, episode_end = self._windows[index]
 
-        history_rows = [self.source[global_t - 1], self.source[global_t]]
         observation_history = torch.stack(
-            [self._normalize_image(row["observation.image"]) for row in history_rows]
+            [self._image(global_t - 1), self._image(global_t)]
         )
         positions = self._states[global_t - 1 : global_t + 1]
         agent_position = self.normalization.normalize_position(positions)
@@ -208,7 +214,7 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
         future_valid_mask = torch.zeros(self.future_horizon, dtype=torch.bool)
         future_valid_mask[:future_count] = True
         future_images = [
-            self._normalize_image(self.source[row]["observation.image"])
+            self._image(row)
             for row in future_rows
         ]
         if not future_images:
@@ -224,6 +230,11 @@ class MiniWAMDataset(Dataset[dict[str, Tensor]]):
         sample["future_observations"] = torch.stack(future_images)
         sample["future_valid_mask"] = future_valid_mask
         return sample
+
+    def _image(self, index: int) -> Tensor:
+        if self._image_cache is not None:
+            return self._image_cache[index]
+        return self._normalize_image(self.source[index]["observation.image"])
 
     def source_indices(self, index: int) -> tuple[int, int, int, int]:
         """Expose window metadata for correctness tests and debugging."""

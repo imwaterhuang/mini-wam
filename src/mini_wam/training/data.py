@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import os
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +45,7 @@ def build_training_data(
         "action_horizon": int(data_config["action_horizon"]),
         "future_horizon": int(data_config["future_horizon"]),
         "include_future_observations": include_future_observations,
+        "image_cache_path": os.environ.get("MINI_WAM_IMAGE_CACHE") or None,
     }
     train_dataset = MiniWAMDataset(
         dataset_root,

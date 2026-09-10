@@ -1,0 +1,62 @@
+[
+  {
+    "path": "representative_videos/action_only_only_success__action_only__web-random-09.mp4",
+    "scene_id": "web-random-09",
+    "model": "action_only",
+    "decoded_frames": 137,
+    "expected_frames": 137,
+    "width": 384,
+    "height": 384,
+    "fps": 10.0
+  },
+  {
+    "path": "representative_videos/action_only_only_success__future_aware__web-random-09.mp4",
+    "scene_id": "web-random-09",
+    "model": "future_aware",
+    "decoded_frames": 301,
+    "expected_frames": 301,
+    "width": 384,
+    "height": 384,
+    "fps": 10.0
+  },
+  {
+    "path": "representative_videos/future_aware_only_success__action_only__web-random-00.mp4",
+    "scene_id": "web-random-00",
+    "model": "action_only",
+    "decoded_frames": 301,
+    "expected_frames": 301,
+    "width": 384,
+    "height": 384,
+    "fps": 10.0
+  },
+  {
+    "path": "representative_videos/future_aware_only_success__future_aware__web-random-00.mp4",
+    "scene_id": "web-random-00",
+    "model": "future_aware",
+    "decoded_frames": 150,
+    "expected_frames": 150,
+    "width": 384,
+    "height": 384,
+    "fps": 10.0
+  },
+  {
+    "path": "representative_videos/shared_success__action_only__web-random-04.mp4",
+    "scene_id": "web-random-04",
+    "model": "action_only",
+    "decoded_frames": 115,
+    "expected_frames": 115,
+    "width": 384,
+    "height": 384,
+    "fps": 10.0
+  },
+  {
+    "path": "representative_videos/shared_success__future_aware__web-random-04.mp4",
+    "scene_id": "web-random-04",
+    "model": "future_aware",
+    "decoded_frames": 111,
+    "expected_frames": 111,
+    "width": 384,
+    "height": 384,
+    "fps": 10.0
+  }
+]

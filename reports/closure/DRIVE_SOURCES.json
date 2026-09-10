@@ -1,0 +1,141 @@
+{
+  "source_folder": "https://drive.google.com/drive/folders/1TSKWAM6sTT2rD_FfQlEhhQlEjiohIKc-",
+  "access": "Original Drive files are private; repository copies need no Drive access.",
+  "files": [
+    {
+      "path": "ARTIFACT_MANIFEST.json",
+      "url": "https://drive.google.com/file/d/1caekMe6N-ut1VdDSCDTxm9deqwAWiH5U/view?usp=drivesdk",
+      "size": 2649
+    },
+    {
+      "path": "PROJECT_CONCLUSION.md",
+      "url": "https://drive.google.com/file/d/119uzFlm5S2i-2sg0LjULiteltjcP-9mT/view?usp=drivesdk",
+      "size": 2722
+    },
+    {
+      "path": "FINAL_REPORT.json",
+      "url": "https://drive.google.com/file/d/1GMbM3kvXQdGhsxnQb6O4CskHLxuQ1aTY/view?usp=drivesdk",
+      "size": 4371
+    },
+    {
+      "path": "paired_comparison.csv",
+      "url": "https://drive.google.com/file/d/1JUxVE5rhQYGWo89W6AIpAydEcd8_caw1/view?usp=drivesdk",
+      "size": 2182
+    },
+    {
+      "path": "results.json",
+      "url": "https://drive.google.com/file/d/1f2JZ5uUDl7UeGZ1qg1axt3NfhqF3gQOt/view?usp=drivesdk",
+      "size": 20347
+    },
+    {
+      "path": "scenes.json",
+      "url": "https://drive.google.com/file/d/156fRgFbgzmWPO8k7OAjYjfVognuAWw_7/view?usp=drivesdk",
+      "size": 5286
+    },
+    {
+      "path": "figures/paired_comparison.png",
+      "url": "https://drive.google.com/file/d/1LC5Rr4e1j-SCV3CQtDN6zuJO1EKjRgMA/view?usp=drivesdk",
+      "size": 56832
+    },
+    {
+      "path": "figures/counterfactual_losses.png",
+      "url": "https://drive.google.com/file/d/1ogC3JRoBmcVJgO2V7uWYp4vwlhDOa4mS/view?usp=drivesdk",
+      "size": 41610
+    },
+    {
+      "path": "figures/future_aware_loss_curves.png",
+      "url": "https://drive.google.com/file/d/1tLLhXQSIg6RvOgThfMYzz4zqWmY1EK1v/view?usp=drivesdk",
+      "size": 161493
+    },
+    {
+      "path": "representative_videos/action_only_only_success__action_only__web-random-09.mp4",
+      "url": "https://drive.google.com/file/d/1q29Wuyx5OOGhGD_bxdV_PwL91GpqjlvG/view?usp=drivesdk",
+      "size": 51337
+    },
+    {
+      "path": "representative_videos/action_only_only_success__future_aware__web-random-09.mp4",
+      "url": "https://drive.google.com/file/d/1BjvE1VHzqj9dWn5KXPqybp6pGFaGb1Ni/view?usp=drivesdk",
+      "size": 94760
+    },
+    {
+      "path": "representative_videos/shared_success__future_aware__web-random-04.mp4",
+      "url": "https://drive.google.com/file/d/1qb81xTeGBxQB1LMZVWFpdaY2gCDDkOnV/view?usp=drivesdk",
+      "size": 45185
+    },
+    {
+      "path": "representative_videos/shared_success__action_only__web-random-04.mp4",
+      "url": "https://drive.google.com/file/d/1VC5f6GLd6A9tj7sWmQM1ogQakHeFlW6m/view?usp=drivesdk",
+      "size": 43897
+    },
+    {
+      "path": "representative_videos/future_aware_only_success__future_aware__web-random-00.mp4",
+      "url": "https://drive.google.com/file/d/1khXHl9ZpMmtAGnYGXhTstj52txXDsx-Y/view?usp=drivesdk",
+      "size": 51953
+    },
+    {
+      "path": "representative_videos/future_aware_only_success__action_only__web-random-00.mp4",
+      "url": "https://drive.google.com/file/d/1eMbV1EH_BqI1FUDUohlD5aA2u8cz2e_F/view?usp=drivesdk",
+      "size": 80384
+    },
+    {
+      "path": "training/future_aware/normalization.json",
+      "url": "https://drive.google.com/file/d/1MfUFO3U-hCzCfMAS9hshhP01nnvwa1RP/view?usp=drivesdk",
+      "size": 302
+    },
+    {
+      "path": "training/future_aware/run.log",
+      "url": "https://drive.google.com/file/d/1Z8sZLJLazP2rgYfbph16pQ9RRz7A35Oc/view?usp=drivesdk",
+      "size": 5033
+    },
+    {
+      "path": "training/future_aware/environment.json",
+      "url": "https://drive.google.com/file/d/1sEJ5o9fghIwYpcnA3bbzGVOt1-gaum1J/view?usp=drivesdk",
+      "size": 448
+    },
+    {
+      "path": "training/future_aware/val_metrics.csv",
+      "url": "https://drive.google.com/file/d/1xEaS4eOsd-ewP1MmYM7E6HEAVOPdtSRi/view?usp=drivesdk",
+      "size": 3670
+    },
+    {
+      "path": "training/future_aware/config.yaml",
+      "url": "https://drive.google.com/file/d/1hrbvCo5hl6jAczq3HlBCdWBF-wYbfi1m/view?usp=drivesdk",
+      "size": 529
+    },
+    {
+      "path": "training/action_only/environment.json",
+      "url": "https://drive.google.com/file/d/1RLHmrsOa51L5cYlz1y47A-vXs7QTUflP/view?usp=drivesdk",
+      "size": 448
+    },
+    {
+      "path": "training/action_only/normalization.json",
+      "url": "https://drive.google.com/file/d/1A8izHfRyhqnBZOQ_zKkxNAghAu4eYF9c/view?usp=drivesdk",
+      "size": 302
+    },
+    {
+      "path": "training/action_only/val_metrics.csv",
+      "url": "https://drive.google.com/file/d/1IFvI7zQdpYsH7PH3w8iY4xrV_P_b8xPM/view?usp=drivesdk",
+      "size": 1562
+    },
+    {
+      "path": "training/action_only/run.log",
+      "url": "https://drive.google.com/file/d/1BTjn1qOTsyvvSfpXRVq_E0KxQPj3VpmZ/view?usp=drivesdk",
+      "size": 2836
+    },
+    {
+      "path": "training/action_only/config.yaml",
+      "url": "https://drive.google.com/file/d/1s6gHClUPJaND06mk7jBC6JlRx8o5sZQE/view?usp=drivesdk",
+      "size": 507
+    },
+    {
+      "path": "counterfactual/results.json",
+      "url": "https://drive.google.com/file/d/1th2UZztlyVYcUzYL89mzB9tnc-D7yjNa/view?usp=drivesdk",
+      "size": 752
+    },
+    {
+      "path": "training/future_aware/training_completion_audit.json",
+      "url": "https://drive.google.com/file/d/1MCtlO0wxf-JvK73xTtQq8Y0ZIkYV821g/view?usp=drivesdk",
+      "size": 1402
+    }
+  ]
+}
