@@ -1,6 +1,12 @@
 # 环境、数据与工作台
 
-所有命令从仓库根目录运行。当前结论见[首页](../README.md)，两模型收尾复现见[复现说明](REPRODUCING.md)。
+所有命令从仓库根目录运行。当前阶段见[项目进度](../PROGRESS.md)和[ACT 规格](../SPEC.md)，历史两模型收尾复现见[复现说明](REPRODUCING.md)。
+
+## 当前 ACT 接入状态（2026-09-14）
+
+ACT（Action Chunking with Transformers，基于 Transformer 的动作分块）将使用全部 206 个示范回合训练，验证使用随机生成的 Push-T 模拟场景，不留出示范验证回合。
+全量回合清单、归一化统计及 ACT 专用入口待实现；现有训练脚本和网页工作台尚未支持 ACT。
+下方环境和原数据获取方式可作基础，数据划分、旧审计统计、训练与评测命令只适用于历史模型，不能直接套用到 ACT。
 
 ## Push-T 模型执行工作台
 
@@ -65,7 +71,9 @@ conda run -p ./.venv python examples/02_mouse_control.py
 - `Esc` 或 `Q`：退出。
 - 目标：将灰色 T 推入绿色 T；`coverage` 越接近 `1` 越好。
 
-## 第二步：审计示范数据
+## 历史第二步：审计示范数据
+
+以下旧审计会保留 185/21 划分及对应统计，供历史复现。ACT 需要独立的全量清单与统计文件，不通过覆盖旧文件切换实验。
 
 ```bash
 conda run -p ./.venv python scripts/audit_dataset.py
@@ -77,7 +85,7 @@ conda run -p ./.venv python scripts/audit_dataset.py
 - `artifacts/data_samples.png`：16 个“历史两帧—未来四帧”样本。
 - `splits/episodes_seed42.json`：按完整 episode 固定的 90% 训练、10% 验证划分。
 
-示范数据不另设测试集。最终测试使用一组独立生成并冻结的 Push-T 随机初始状态；
+在上述历史协议中，示范数据不另设测试集。最终测试使用一组独立生成并冻结的 Push-T 随机初始状态；
 开发初始状态只用于控制表现诊断；两个模型均按最低离线验证损失选择 checkpoint（检查点）。
 
 ### 查看一个模型训练样本
@@ -92,7 +100,7 @@ conda run -p ./.venv python scripts/inspect_training_sample.py
 conda run -p ./.venv pytest tests/test_dataset.py -q
 ```
 
-## 可恢复的 `action_only` 训练
+## 历史可恢复的 `action_only` 训练
 
 先运行 100 步本地 smoke test（冒烟测试）：
 
@@ -118,7 +126,7 @@ conda run -p ./.venv pytest tests/test_dataset.py -q
 开发评估和最终测试的 Push-T 初始状态；正式训练不得使用 smoke test 中限制验证
 批次数的诊断配置。
 
-## 固定评测场景与随机策略基线
+## 历史固定评测场景与随机策略基线
 
 ```bash
 ./.venv/bin/python scripts/freeze_evaluation_scenes.py
